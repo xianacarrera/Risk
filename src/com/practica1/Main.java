@@ -84,7 +84,7 @@ public class Main {
 // Esta clase representa los dados del juego
 class Dados{
 
-    // Devuelve el resultado total de una tirada de dados. El número de estos viene dado como parámetro
+    // Devuelve el resultado total de una tirada de dados, cuyo número viene dado como parámetro
     public int tirarDados(int numDados){
         int sum = 0;
         Random rand = new Random();
