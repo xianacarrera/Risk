@@ -23,31 +23,16 @@ public class Main {
 
     public void crearJugadores(){
         switch(numJug){
-            case 3:
-                Jugador jugador1 = new Jugador();
-                Jugador jugador2 = new Jugador();
-                Jugador jugador3 = new Jugador();
-                break;
-            case 4:
-                Jugador jugador1 = new Jugador();
-                Jugador jugador2 = new Jugador();
-                Jugador jugador3 = new Jugador();
-                Jugador jugador4 = new Jugador();
-                break;
-            case 5:
-                Jugador jugador1 = new Jugador();
-                Jugador jugador2 = new Jugador();
-                Jugador jugador3 = new Jugador();
-                Jugador jugador4 = new Jugador();
-                Jugador jugador5 = new Jugador();
-                break;
             case 6:
-                Jugador jugador1 = new Jugador();
-                Jugador jugador2 = new Jugador();
-                Jugador jugador3 = new Jugador();
-                Jugador jugador4 = new Jugador();
-                Jugador jugador5 = new Jugador();
                 Jugador jugador6 = new Jugador();
+            case 5:
+                Jugador jugador5 = new Jugador();
+            case 4:
+                Jugador jugador4 = new Jugador();
+            case 3:
+                Jugador jugador3 = new Jugador();
+                Jugador jugador2 = new Jugador();
+                Jugador jugador1 = new Jugador();
                 break;
             default:
                 System.out.println("Número de jugadores incorrecto");
