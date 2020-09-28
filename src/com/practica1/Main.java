@@ -8,8 +8,47 @@ public class Main {
 
     private int numJug;
     private Dados dados;
+    // TODO: No estoy segura de que los null aquí sean necesarios o si Java los pone automáticamente - preguntar.
+    private Jugador jugador1 = null, jugador2 = null, jugador3 = null, jugador4 = null, jugador5 = null,
+        jugador6 = null;
+
+    // TODO: Convendría guardar los jugadores en una lista - preguntar si se puede usar ArrayList
+
+
+    // Estas variables aparecen aquí solo para pruebas. Ni caso:
+    private String nombre6 = "Esto";
+    private String nombre5 = "es";
+    private String nombre4 = "un";
+    private String nombre3 = "nombre";
+    private String nombre2 = "inventado";
+    private String nombre1 = "je";
+    private Color color6 = Color.BLUE;
+    private Color color5 = Color.BLUE;
+    private Color color4 = Color.BLUE;
+    private Color color3 = Color.BLUE;
+    private Color color2 = Color.BLUE;
+    private Color color1 = Color.BLUE;
+
+
 
     public static void main(String[] args) {
+        // Para poder lanzar los métodos hace falta una instancia de la clase Main, en este caso, risk
+        Main risk = new Main();
+
+        risk.setNumJug(6);
+        risk.crearJugadores();
+        risk.crearDados();
+
+        risk.pruebas();
+    }
+
+    public void pruebas(){
+        // Código para pruebas varias. Aquí puede ir cualquier cosa, no hacer mucho caso.
+
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(dados.tirarDados(1));
+        }
 
     }
 
@@ -24,15 +63,15 @@ public class Main {
     public void crearJugadores(){
         switch(numJug){
             case 6:
-                Jugador jugador6 = new Jugador();
+                jugador6 = new Jugador(nombre6, color6);
             case 5:
-                Jugador jugador5 = new Jugador();
+                jugador5 = new Jugador(nombre5, color5);
             case 4:
-                Jugador jugador4 = new Jugador();
+                jugador4 = new Jugador(nombre4, color4);
             case 3:
-                Jugador jugador3 = new Jugador();
-                Jugador jugador2 = new Jugador();
-                Jugador jugador1 = new Jugador();
+                jugador3 = new Jugador(nombre3, color3);
+                jugador2 = new Jugador(nombre2, color2);
+                jugador1 = new Jugador(nombre1, color1);
                 break;
             default:
                 System.out.println("Número de jugadores incorrecto");
@@ -47,6 +86,14 @@ public class Main {
     public void crearMapa(){
 
 
+    }
+
+    public void repartirEjercitos(){
+        // No escribir esta función hasta saber si se puede usar ArrayList
+        /* Si admiten ArrayList, escribir un bucle switch en función de la longitud del ArrayList (3, 4, 5 o 6).
+            En cada caso, llamar a la funcion cambiarEjercito para cada jugador y añadir un número de ejércitos fijo
+            (bucle for, número de iteraciones = longitud del ArrayList).
+         */
     }
 
     public void asignarCartasMision(){
@@ -94,6 +141,45 @@ class Continente{
 
 }
 
+
+class Casilla{
+
+    private String pais;
+    private int fila;
+    private int col;
+    private Continente lugar;       // Si la casilla es de mar, sería un Continente especial que represente el océano
+    private Jugador ocupante;       // Jugador que está ocupando la casilla actualmente
+    private int numEjercitos;       // El número de ejércitos que ocupan actualmente la casilla
+
+    Casilla(String pais, int fila, int col, Continente lugar){
+        // Es necesario pasar los atributos fila y col teniendo el nombre del pais? O sería mejor un switch aquí
+        this.pais = pais;
+        this.fila = fila;
+        this.col = col;
+        this.lugar = lugar;
+        this.ocupante = null;       // Inicialmente, al crear el mapa, nadie ocupa la casilla.
+        this.numEjercitos = 0;
+        // No sé si es necesario poner ocupante a null y numEjercitos a 0, preguntar
+    }
+
+    public int getFila(){
+        return this.fila;
+    }
+
+    public int getCol(){
+        return this.col;
+    }
+
+    public Continente getLugar(){
+        return this.lugar;
+    }
+
+    public void ocuparCasilla(Jugador jugador){
+        this.ocupante = jugador;
+    }
+
+}
+
 class Jugador{
 
     private String nombre;
@@ -104,7 +190,44 @@ class Jugador{
         this.nombre = nombre;
         this.color = color;
         this.numEjercitos = 0;
+        // No estoy segura de si esto es necesario o Java pone numEjercitos automáticamente a 0
+    }
+
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public Color getColor(){
+        return this.color;
+    }
+
+    public void cambiarEjercito(int numTropas){
+        /* El nombre es un poco ambiguo (de primeras añadirEjercito o algo así quedaría mejor), pero esta función
+            se puede reutilizar para RESTAR tropas. Si un jugador pierde tropas, se le puede pasar un número negativo
+            y ya. Haría falta poner un if para que el número de tropas no pueda ser negativo (si llega a 0, creo
+            que el jugador pierde y punto).
+        */
+
+        numEjercitos += numTropas;
     }
 
 
 }
+
+class Ejercito{
+
+    private Jugador propietario;
+    private Casilla pais;
+
+}
+
+class Carta{
+
+
+}
+
+/*
+class CartaMision implements Carta{
+
+}
+*/
