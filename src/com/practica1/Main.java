@@ -1,6 +1,7 @@
 package com.practica1;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -13,6 +14,7 @@ public class Main {
         jugador6 = null;
 
     // TODO: Convendría guardar los jugadores en una lista - preguntar si se puede usar ArrayList
+    private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
 
     // Estas variables aparecen aquí solo para pruebas. Ni caso:
@@ -61,17 +63,52 @@ public class Main {
     }
 
     public void crearJugadores(){
+        // Simplificar switch? Cambiar por ifs?
+        // Ya sé que este switch es una chapuza. Que conste que sin usar ArrayList era bastante elegante -_-
         switch(numJug){
-            case 6:
-                jugador6 = new Jugador(nombre6, color6);
-            case 5:
-                jugador5 = new Jugador(nombre5, color5);
-            case 4:
-                jugador4 = new Jugador(nombre4, color4);
             case 3:
-                jugador3 = new Jugador(nombre3, color3);
-                jugador2 = new Jugador(nombre2, color2);
                 jugador1 = new Jugador(nombre1, color1);
+                jugadores.add(jugador1);
+                jugador2 = new Jugador(nombre2, color2);
+                jugadores.add(jugador2);
+                jugador3 = new Jugador(nombre3, color3);
+                jugadores.add(jugador3);
+                break;
+            case 4:
+                jugador1 = new Jugador(nombre1, color1);
+                jugadores.add(jugador1);
+                jugador2 = new Jugador(nombre2, color2);
+                jugadores.add(jugador2);
+                jugador3 = new Jugador(nombre3, color3);
+                jugadores.add(jugador3);
+                jugador4 = new Jugador(nombre4, color4);
+                jugadores.add(jugador4);
+                break;
+            case 5:
+                jugador1 = new Jugador(nombre1, color1);
+                jugadores.add(jugador1);
+                jugador2 = new Jugador(nombre2, color2);
+                jugadores.add(jugador2);
+                jugador3 = new Jugador(nombre3, color3);
+                jugadores.add(jugador3);
+                jugador4 = new Jugador(nombre4, color4);
+                jugadores.add(jugador4);
+                jugador5 = new Jugador(nombre5, color5);
+                jugadores.add(jugador5);
+                break;
+            case 6:
+                jugador1 = new Jugador(nombre1, color1);
+                jugadores.add(jugador1);
+                jugador2 = new Jugador(nombre2, color2);
+                jugadores.add(jugador2);
+                jugador3 = new Jugador(nombre3, color3);
+                jugadores.add(jugador3);
+                jugador4 = new Jugador(nombre4, color4);
+                jugadores.add(jugador4);
+                jugador5 = new Jugador(nombre5, color5);
+                jugadores.add(jugador5);
+                jugador6 = new Jugador(nombre6, color6);
+                jugadores.add(jugador6);
                 break;
             default:
                 System.out.println("Número de jugadores incorrecto");
@@ -89,11 +126,17 @@ public class Main {
     }
 
     public void repartirEjercitos(){
-        // No escribir esta función hasta saber si se puede usar ArrayList
-        /* Si admiten ArrayList, escribir un bucle switch en función de la longitud del ArrayList (3, 4, 5 o 6).
-            En cada caso, llamar a la funcion cambiarEjercito para cada jugador y añadir un número de ejércitos fijo
-            (bucle for, número de iteraciones = longitud del ArrayList).
-         */
+        // Número de ejércitos a añadir en función del número de jugadores:
+        // 6 -> 20 = 5 * 4 = 5 * (10 - 6)
+        // 5 -> 25 = 5 * 5 = 5 * (10 - 5)
+        // 4 -> 30 = 5 * 6 = 5 * (10 - 4)
+        // 3 -> 35 = 5 * 7 = 5 * (10 - 3)
+
+        if (jugadores.size() >= 3 && jugadores.size() <= 6) {
+            for (Jugador jugador : jugadores) {
+                jugador.cambiarEjercito(5 * (10 - jugadores.size()));
+            }
+        }
     }
 
     public void asignarCartasMision(){
