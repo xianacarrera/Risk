@@ -4,14 +4,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/* Dudas:
+    - En la clase jugador, convendría dividir cambiarEjercito en 3 métodos distintos (añadirEjercito, quitarEjercito,
+        setEjercito)?
+    - Class Color?
+
+ */
+
+
 
 public class Main {
 
     private int numJug;
     private Dados dados;
-    // TODO: No estoy segura de que los null aquí sean necesarios o si Java los pone automáticamente - preguntar.
-    private Jugador jugador1 = null, jugador2 = null, jugador3 = null, jugador4 = null, jugador5 = null,
-        jugador6 = null;
+    private Jugador jugador1, jugador2, jugador3, jugador4, jugador5, jugador6;
 
     // TODO: Convendría guardar los jugadores en una lista - preguntar si se puede usar ArrayList
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
@@ -184,6 +190,10 @@ class Continente{
 
 }
 
+class Pais{
+
+}
+
 
 class Casilla{
 
@@ -200,9 +210,6 @@ class Casilla{
         this.fila = fila;
         this.col = col;
         this.lugar = lugar;
-        this.ocupante = null;       // Inicialmente, al crear el mapa, nadie ocupa la casilla.
-        this.numEjercitos = 0;
-        // No sé si es necesario poner ocupante a null y numEjercitos a 0, preguntar
     }
 
     public int getFila(){
@@ -228,12 +235,17 @@ class Jugador{
     private String nombre;
     private Color color;
     private int numEjercitos;   // No estoy segura de si esto haría falta, lo dejo de momento
+    private ArrayList<Pais> paises;     // Países controlados por el jugador
 
     Jugador(String nombre, Color color){
         this.nombre = nombre;
         this.color = color;
-        this.numEjercitos = 0;
-        // No estoy segura de si esto es necesario o Java pone numEjercitos automáticamente a 0
+        paises = new ArrayList<Pais>();
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador: " + nombre + ", color: " + color;
     }
 
     public String getNombre(){
@@ -242,6 +254,10 @@ class Jugador{
 
     public Color getColor(){
         return this.color;
+    }
+
+    public int getNumEjercitos() {
+        return this.numEjercitos;
     }
 
     public void cambiarEjercito(int numTropas){
