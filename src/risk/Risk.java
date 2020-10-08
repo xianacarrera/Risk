@@ -12,7 +12,6 @@ import java.util.Random;
  */
 
 
-
 public class Risk {
 
     private int numJug;
@@ -24,10 +23,6 @@ public class Risk {
     private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
 
-
-
-
-
     public static void main(String[] args) {
         // Para poder lanzar los métodos hace falta una instancia de la clase Main, en este caso, risk
         Menu menu = new Menu();
@@ -36,11 +31,11 @@ public class Risk {
         menu.verMapa();
     }
 
-    public void setNumJug(int numJug){
+    public void setNumJug(int numJug) {
         this.numJug = numJug;
     }
 
-    public int getNumJug(){
+    public int getNumJug() {
         return this.numJug;
     }
 
@@ -100,7 +95,7 @@ public class Risk {
     }
      */
 
-    public void crearDados(){
+    public void crearDados() {
         dados = new Dados();
     }
 
@@ -149,33 +144,33 @@ public class Risk {
 
     }
 
-    public void verMapa(){
+    public void verMapa() {
         int i, j, k;
         String temp;
 
         System.out.print("|");
-        for(j = 0; j < 11; j++){
+        for (j = 0; j < 11; j++) {
             System.out.print("===========|");
         }
         System.out.print("\n");
-        for(i = 0; i < 2; i++){
+        for (i = 0; i < 2; i++) {
             System.out.print("|");
-            for(j = 0; j < 11; j++){
+            for (j = 0; j < 11; j++) {
                 System.out.print("===========|");
             }
             System.out.print("\n|");
-            for(j = 0; j < 11; j++){
+            for (j = 0; j < 11; j++) {
                 System.out.print(" " +
                         mapa.get(i * 11 + j).getLugar().getColor() +
                         mapa.get(i * 11 + j).toString());
                 System.out.print(" |");
             }
             System.out.print("\n|");
-            for(j = 0; j < 11; j++){
+            for (j = 0; j < 11; j++) {
                 // valueOf convierte int a String
                 temp = String.valueOf(mapa.get(i * 11 + j).getNumEjercitos());
                 System.out.print(" " + temp);
-                for(k = 0; k < (10 - temp.length()); k++){
+                for (k = 0; k < (10 - temp.length()); k++) {
                     System.out.print(" ");
                 }
                 System.out.print("|");
@@ -185,8 +180,7 @@ public class Risk {
     }
 
 
-
-    public void repartirEjercitos(){
+    public void repartirEjercitos() {
         // Número de ejércitos a añadir en función del número de jugadores:
         // 6 -> 20 = 5 * 4 = 5 * (10 - 6)
         // 5 -> 25 = 5 * 5 = 5 * (10 - 5)
@@ -200,34 +194,34 @@ public class Risk {
         }
     }
 
-    public void asignarCartasMision(){
+    public void asignarCartasMision() {
 
     }
 
-    public void asignarPaises(){
+    public void asignarPaises() {
 
     }
 
-    public void repartirCartasEjercito(){
+    public void repartirCartasEjercito() {
 
     }
 
-    public void jugarPartida(){
+    public void jugarPartida() {
 
     }
 }
 
 // Esta clase representa los dados del juego
-class Dados{
+class Dados {
 
     // Devuelve el resultado total de una tirada de dados, cuyo número viene dado como parámetro
-    public int tirarDados(int numDados){
+    public int tirarDados(int numDados) {
         int sum = 0;
         Random rand = new Random();
 
         if (numDados > 0 && numDados < 4) {
-            for (int i = 0; i < numDados; i++){
-                   sum += rand.nextInt(6) + 1;
+            for (int i = 0; i < numDados; i++) {
+                sum += rand.nextInt(6) + 1;
                    /* nextInt genera un entero aleatorio, en este caso, entre 0 (incluido) y 6 (no incluido). Para
                     que el rango pase a estar entre 1 y 6, le sumo 1 al resultado: pasa a un rango del 1 (incluido)
                     al 7 (no incluido) - 1,2,3,4,5,6
@@ -241,14 +235,14 @@ class Dados{
     }
 }
 
-class Continente{
+class Continente {
     //Atributos
     private String nombre;
     private int numeroEjercitos;
     private String color;
     private ArrayList<Pais> paises;
 
-    Continente(String nombre){
+    Continente(String nombre) {
         setNombre(nombre);
         asignarColorContinente();
         crearPaises();
@@ -262,57 +256,57 @@ class Continente{
         paises = new ArrayList<>();
         switch (this.nombre) {
             case "Asia":
-                paises.add(new Pais("Afganistan", "Afgan"));
-                paises.add(new Pais("China", "China"));
-                paises.add(new Pais("India", "India"));
-                paises.add(new Pais("Irkutsk", "Irkustsk"));
-                paises.add(new Pais("Japón", "Japón"));
-                paises.add(new Pais("Kamchatka", "Kamchatka"));
-                paises.add(new Pais("Mongolia", "Mongolia"));
-                paises.add(new Pais("Oriente Medio", "OMedio"));
-                paises.add(new Pais("Siberia", "Siberia"));
-                paises.add(new Pais("Sudeste Asiático", "SAsiático"));
-                paises.add(new Pais("Urales", "Urales"));
-                paises.add(new Pais("Yakutsk", "Yakutsk"));
+                paises.add(new Pais("Afganistan"));
+                paises.add(new Pais("China"));
+                paises.add(new Pais("India"));
+                paises.add(new Pais("Irkutsk"));
+                paises.add(new Pais("Japón"));
+                paises.add(new Pais("Kamchatka"));
+                paises.add(new Pais("Mongolia"));
+                paises.add(new Pais("Oriente Medio"));
+                paises.add(new Pais("Siberia"));
+                paises.add(new Pais("Sudeste Asiático"));
+                paises.add(new Pais("Urales"));
+                paises.add(new Pais("Yakutsk"));
                 break;
             case "África":
-                paises.add(new Pais("África del Norte", "ANorte"));
-                paises.add(new Pais("África Oriental", "AOriental"));
-                paises.add(new Pais("Congo", "Congo"));
-                paises.add(new Pais("Egipto", "Egipto"));
-                paises.add(new Pais("Madagascar", "Madagasca"));
-                paises.add(new Pais("Sudáfrica", "Sudáfrica"));
+                paises.add(new Pais("África del Norte"));
+                paises.add(new Pais("África Oriental"));
+                paises.add(new Pais("Congo"));
+                paises.add(new Pais("Egipto"));
+                paises.add(new Pais("Madagascar"));
+                paises.add(new Pais("Sudáfrica"));
             case "Europa":
-                paises.add(new Pais("Escandinavia", "Escandina"));
-                paises.add(new Pais("Europa del Norte", "EurNorte"));
-                paises.add(new Pais("Europa Occidental", "EurOcc"));
-                paises.add(new Pais("Europa del Sur", "EurSur"));
-                paises.add(new Pais("Gran Bretaña", "GBretaña"));
-                paises.add(new Pais("Islandia", "Islandia"));
-                paises.add(new Pais("Rusia", "Rusia"));
+                paises.add(new Pais("Escandinavia"));
+                paises.add(new Pais("Europa del Norte"));
+                paises.add(new Pais("Europa Occidental"));
+                paises.add(new Pais("Europa del Sur"));
+                paises.add(new Pais("Gran Bretaña"));
+                paises.add(new Pais("Islandia"));
+                paises.add(new Pais("Rusia"));
                 break;
             case "América del Norte":
-                paises.add(new Pais("Alaska", "Alaska"));
-                paises.add(new Pais("Alberta", "Alberta"));
-                paises.add(new Pais("América Central", "AmeCentral"));
-                paises.add(new Pais("Groenlandia", "Groenlan"));
-                paises.add(new Pais("Ontario", "Ontario"));
-                paises.add(new Pais("Quebec", "Quebec"));
-                paises.add(new Pais("Territorios del Noroeste", "TNoroeste"));
-                paises.add(new Pais("Estados Unidos del Este", "USAEste"));
-                paises.add(new Pais("Estados Unidos del Oeste", "USAOeste"));
+                paises.add(new Pais("Alaska"));
+                paises.add(new Pais("Alberta"));
+                paises.add(new Pais("América Central"));
+                paises.add(new Pais("Groenlandia"));
+                paises.add(new Pais("Ontario"));
+                paises.add(new Pais("Quebec"));
+                paises.add(new Pais("Territorios del Noroeste"));
+                paises.add(new Pais("Estados Unidos del Este"));
+                paises.add(new Pais("Estados Unidos del Oeste"));
                 break;
             case "América del Sur":
-                paises.add(new Pais("Venezuela", "Venezuela"));
-                paises.add(new Pais("Perú", "Perú"));
-                paises.add(new Pais("Brasil", "Brasil"));
-                paises.add(new Pais("Argentina", "Argentina"));
+                paises.add(new Pais("Venezuela"));
+                paises.add(new Pais("Perú"));
+                paises.add(new Pais("Brasil"));
+                paises.add(new Pais("Argentina"));
                 break;
             case "Australia":
-                paises.add(new Pais("Indonesia", "Indonesia"));
-                paises.add(new Pais("Nueva Guinea", "NGuinea"));
-                paises.add(new Pais("Australia Occidental", "AusOccid"));
-                paises.add(new Pais("Australia Oriental", "AusOrient"));
+                paises.add(new Pais("Indonesia"));
+                paises.add(new Pais("Nueva Guinea"));
+                paises.add(new Pais("Australia Occidental"));
+                paises.add(new Pais("Australia Oriental"));
                 break;
             case "Oceanos":
                 break;
@@ -324,7 +318,7 @@ class Continente{
         return paises;
     }
 
-    public Pais getPais(int i){
+    public Pais getPais(int i) {
         return this.paises.get(i);
     }
 
@@ -344,38 +338,37 @@ class Continente{
     }
 
 
-    public String getColor(){
+    public String getColor() {
         return this.color;
     }
 
-    public void asignarColorContinente(){
-        switch(nombre){
+    public void asignarColorContinente() {
+        switch (nombre) {
             case "Asia":
-                this.color="\033[4;36m";        // CYAN
+                this.color = "\033[4;36m";        // CYAN
                 break;
             case "África":
-                this.color="\033[4;32m";        // VERDE
+                this.color = "\033[4;32m";        // VERDE
                 break;
             case "Europa":
-                this.color="\033[4;33m";        // AMARILLO
+                this.color = "\033[4;33m";        // AMARILLO
                 break;
             case "América del Norte":
-                this.color="\033[4;35m";        // VIOLETA
+                this.color = "\033[4;35m";        // VIOLETA
                 break;
             case "América del Sur":
-                this.color="\033[4;31m";        // ROJO
+                this.color = "\033[4;31m";        // ROJO
                 break;
             case "Australia":
-                this.color="\033[4;34m";        // AZUL
+                this.color = "\033[4;34m";        // AZUL
                 break;
             case "Océanos":
-                this.color="\033[4;37m";       // BLANCO
+                this.color = "\033[4;37m";       // BLANCO
                 break;
             //No hay default porque esto ya se comprueba en setNombre
 
         }
     }
-
 
 
 }
@@ -384,10 +377,11 @@ class Pais {
 
     private String nombre;
     private String abreviatura;
+    private boolean esFrontera;
 
-    public Pais(String nombre, String abreviatura) {
+    public Pais(String nombre) {
         setNombre(nombre);
-        setAbreviatura(abreviatura);
+        setAbreviatura();
     }
 
     public void setNombre(String nombre) {
@@ -444,75 +438,119 @@ class Pais {
         return nombre;
     }
 
-    public void setAbreviatura(String abreviatura) {
-        if (abreviatura.equals("Afgan")
-                || abreviatura.equals("China")
-                || abreviatura.equals("India")
-                || abreviatura.equals("Irkutsk")
-                || abreviatura.equals("Japón")
-                || abreviatura.equals("Kamchatka")
-                || abreviatura.equals("Mongolia")
-                || abreviatura.equals("OMedio")
-                || abreviatura.equals("Siberia")
-                || abreviatura.equals("SAsiático")
-                || abreviatura.equals("Urales")
-                || abreviatura.equals("Yakutsk")
-                || abreviatura.equals("ANorte")
-                || abreviatura.equals("AOriental")
-                || abreviatura.equals("Congo")
-                || abreviatura.equals("Egipto")
-                || abreviatura.equals("Madagasca")
-                || abreviatura.equals("Sudáfrica")
-                || abreviatura.equals("Escandina")
-                || abreviatura.equals("EurNorte")
-                || abreviatura.equals("EurOcc")
-                || abreviatura.equals("EurSur")
-                || abreviatura.equals("GBretaña")
-                || abreviatura.equals("Islandia")
-                || abreviatura.equals("Rusia")
-                || abreviatura.equals("Alaska")
-                || abreviatura.equals("Alberta")
-                || abreviatura.equals("AmeCentral")
-                || abreviatura.equals("Groenlan")
-                || abreviatura.equals("Ontario")
-                || abreviatura.equals("Quebec")
-                || abreviatura.equals("TNoroeste")
-                || abreviatura.equals("USAEste")
-                || abreviatura.equals("USAOeste")
-                || abreviatura.equals("Venezuela")
-                || abreviatura.equals("Perú")
-                || abreviatura.equals("Brasil")
-                || abreviatura.equals("Argentina")
-                || abreviatura.equals("Indonesia")
-                || abreviatura.equals("NGuinea")
-                || abreviatura.equals("AusOccid")
-                || abreviatura.equals("AusOrient")) {
-            this.abreviatura = abreviatura;
-        } else {
-            System.out.println("No es una abrviatura");
+    public void setAbreviatura() {
+        switch (this.nombre) {
+            case "Afganistan":
+                this.abreviatura = "Afgan";
+
+            case "China":
+                this.abreviatura = "China";
+            case "India":
+                this.abreviatura = "India";
+            case "Irkutsk":
+                this.abreviatura = "Irkutsk";
+            case "Japón":
+                this.abreviatura = "Japón";
+            case "Kamchatka":
+                this.abreviatura = "Kamchatka";
+            case "Mongolia":
+                this.abreviatura = "Mongolia";
+            case "Oriente Medio":
+                this.abreviatura = "OMedio";
+            case "Siberia":
+                this.abreviatura = "Siberia";
+            case "Sudeste Asiático":
+                this.abreviatura = "SAsiático";
+            case "Urales":
+                this.abreviatura = "Urales";
+            case "Yakutsk":
+                this.abreviatura = "Yakutsk";
+            case "África del Norte":
+                this.abreviatura = "ANorte";
+            case "África Oriental":
+                this.abreviatura = "AOriental";
+            case "Congo":
+                this.abreviatura = "Congo";
+            case "Egipto":
+                this.abreviatura = "Egipto";
+            case "Madagascar":
+                this.abreviatura = "Madagasca";
+            case "Sudáfrica":
+                this.abreviatura = "Sudáfrica";
+            case "Escandinavia":
+                this.abreviatura = "Escandina";
+            case "Europa del Norte":
+                this.abreviatura = "EurNorte";
+            case "Europa Occidental":
+                this.abreviatura = "EurOcc";
+            case "Europa del Sur":
+                this.abreviatura = "EurSur";
+            case "Gran Bretaña":
+                this.abreviatura = "GBretaña";
+            case "Islandia":
+                this.abreviatura = "Islandia";
+            case "Rusia":
+                this.abreviatura = "Rusia";
+            case "Alaska":
+                this.abreviatura = "Alaska";
+            case "Alberta":
+                this.abreviatura = "Alberta";
+            case "América Central":
+                this.abreviatura = "AmeCentral";
+            case "Groenlandia":
+                this.abreviatura = "Groenlan";
+            case "Ontario":
+                this.abreviatura = "Ontario";
+            case "Quebec":
+                this.abreviatura = "Quebec";
+            case "Territorios del Noroeste":
+                this.abreviatura = "TNoroeste";
+            case "Estados Unidos del Este":
+                this.abreviatura = "USAEste";
+            case "Estados Unidos del Oeste":
+                this.abreviatura = "USAOeste";
+            case "Venezuela":
+                this.abreviatura = "Venezuela";
+            case "Perú":
+                this.abreviatura = "Perú";
+            case "Brasil":
+                this.abreviatura = "Brasil";
+            case "Argentina":
+                this.abreviatura = "Argentina";
+            case "Indonesia":
+                this.abreviatura = "Indonesia";
+            case "Nueva Guinea":
+                this.abreviatura = "NGuinea";
+            case "Australia Occidental":
+                this.abreviatura = "AusOccid";
+            case "Australia Oriental":
+                this.abreviatura = "AusOrient";
         }
 
     }
 
-    public String getAbreviatura(){
+
+    public String getAbreviatura() {
         return abreviatura;
     }
 
     /*
     public boolean esPaisFrontera(){
+        //Conexiones directas
 
     }
      */
+
 
     @Override
     public String toString() {
         return this.abreviatura;
     }
 
-    }
+}
 
 
-class Casilla{
+class Casilla {
 
     private Pais pais;
     private int fila;
@@ -521,7 +559,7 @@ class Casilla{
     // private Jugador ocupante;       // Jugador que está ocupando la casilla actualmente
     private int numEjercitos;       // El número de ejércitos que ocupan actualmente la casilla
 
-    Casilla(Pais pais, int fila, int col, Continente lugar){
+    Casilla(Pais pais, int fila, int col, Continente lugar) {
         // Es necesario pasar los atributos fila y col teniendo el nombre del pais? O sería mejor un switch aquí
         this.pais = pais;
         this.fila = fila;
@@ -534,19 +572,19 @@ class Casilla{
         return this.pais.toString();
     }
 
-    public int getFila(){
+    public int getFila() {
         return this.fila;
     }
 
-    public int getCol(){
+    public int getCol() {
         return this.col;
     }
 
-    public Continente getLugar(){
+    public Continente getLugar() {
         return this.lugar;
     }
 
-    public int getNumEjercitos(){
+    public int getNumEjercitos() {
         return this.numEjercitos;
     }
 
@@ -559,14 +597,14 @@ class Casilla{
 }
 
 
-class Jugador{
+class Jugador {
 
     private String nombre;
     private Color color;
     private int numEjercitos;   // No estoy segura de si esto haría falta, lo dejo de momento
     private ArrayList<Pais> paises;     // Países controlados por el jugador
 
-    Jugador(String nombre, Color color){
+    Jugador(String nombre, Color color) {
         this.nombre = nombre;
         this.color = color;
         paises = new ArrayList<Pais>();
@@ -577,11 +615,11 @@ class Jugador{
         return "Jugador: " + nombre + ", color: " + color;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return this.nombre;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return this.color;
     }
 
@@ -589,7 +627,7 @@ class Jugador{
         return this.numEjercitos;
     }
 
-    public void cambiarEjercito(int numTropas){
+    public void cambiarEjercito(int numTropas) {
         /* El nombre es un poco ambiguo (de primeras añadirEjercito o algo así quedaría mejor), pero esta función
             se puede reutilizar para RESTAR tropas. Si un jugador pierde tropas, se le puede pasar un número negativo
             y ya. Haría falta poner un if para que el número de tropas no pueda ser negativo (si llega a 0, creo
@@ -602,14 +640,14 @@ class Jugador{
 
 }
 
-class Ejercito{
+class Ejercito {
 
     private Jugador propietario;
     private Casilla pais;
 
 }
 
-class Carta{
+class Carta {
 
 
 }
