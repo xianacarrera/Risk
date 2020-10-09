@@ -105,7 +105,6 @@ public class Risk {
      */
     public void crearMapa() {
         // Código necesario para crear el mapa
-        int i, j;
         mapa = new ArrayList<>();
 
         Continente asia = new Continente("Asia");
@@ -122,15 +121,15 @@ public class Risk {
                 americaDelNorte));
         mapa.add(new Casilla(americaDelNorte.getPais(3), 1, 3,
                 americaDelNorte));
-        mapa.add(new Casilla(oceanos.getPais(0), 1, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(1), 1, 4, oceanos));
         mapa.add(new Casilla(europa.getPais(5), 1, 5, europa));
         mapa.add(new Casilla(europa.getPais(0), 1, 6, europa));
         mapa.add(new Casilla(asia.getPais(9), 1, 7, asia));
         mapa.add(new Casilla(asia.getPais(11), 1, 8, asia));
         mapa.add(new Casilla(asia.getPais(5), 1, 9, asia));
         // Nota: distinguir los océanos con conexiones verticales, horizontales... ?
-        mapa.add(new Casilla(oceanos.getPais(0), 1, 10, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 1, 11, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(1), 1, 10, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(1), 1, 11, oceanos));
 
         mapa.add(new Casilla(americaDelNorte.getPais(1), 2, 1,
                 americaDelNorte));
@@ -141,6 +140,83 @@ public class Risk {
         mapa.add(new Casilla(oceanos.getPais(0), 2, 4, oceanos));
         mapa.add(new Casilla(oceanos.getPais(0), 2, 5, oceanos));
         mapa.add(new Casilla(europa.getPais(4), 2, 6, europa));
+        mapa.add(new Casilla(europa.getPais(1), 2, 7, europa));
+        mapa.add(new Casilla(europa.getPais(6), 2, 8, europa));
+        mapa.add(new Casilla(asia.getPais(3), 2, 9, asia));
+        mapa.add(new Casilla(oceanos.getPais(0), 2, 10, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 2, 11, oceanos));
+
+        mapa.add(new Casilla(americaDelNorte.getPais(8), 3, 1, americaDelNorte));
+        mapa.add(new Casilla(americaDelNorte.getPais(7), 3, 2, americaDelNorte));
+        mapa.add(new Casilla(oceanos.getPais(0), 3, 3, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 3, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 3, 5, oceanos));
+        mapa.add(new Casilla(europa.getPais(3), 3, 6, europa));
+        mapa.add(new Casilla(europa.getPais(2), 3, 7, europa));
+        mapa.add(new Casilla(asia.getPais(10), 3, 8, asia));
+        mapa.add(new Casilla(asia.getPais(6), 3, 9, asia));
+        mapa.add(new Casilla(asia.getPais(4), 3, 10, asia));
+        mapa.add(new Casilla(oceanos.getPais(0), 3, 11, oceanos));
+
+        mapa.add(new Casilla(oceanos.getPais(0), 4, 1, oceanos));
+        mapa.add(new Casilla(americaDelNorte.getPais(2), 4, 2, americaDelNorte));
+        mapa.add(new Casilla(oceanos.getPais(0), 4, 3, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 4, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 4, 5, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(2), 4, 6, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(2), 4, 7, oceanos));
+        mapa.add(new Casilla(asia.getPais(0), 4, 8, asia));
+        mapa.add(new Casilla(asia.getPais(1), 4, 9, asia));
+        mapa.add(new Casilla(oceanos.getPais(0), 4, 10, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 4, 11, oceanos));
+
+        mapa.add(new Casilla(oceanos.getPais(0), 5, 1, oceanos));
+        mapa.add(new Casilla(americaDelSur.getPais(3), 5, 2, americaDelSur));
+        mapa.add(new Casilla(oceanos.getPais(0), 5, 3, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 5, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(1), 5, 5, oceanos));
+        mapa.add(new Casilla(africa.getPais(0), 5, 6, africa));
+        mapa.add(new Casilla(africa.getPais(3), 5, 7, africa));
+        mapa.add(new Casilla(asia.getPais(7), 5, 8, asia));
+        mapa.add(new Casilla(asia.getPais(2), 5, 9, asia));
+        mapa.add(new Casilla(asia.getPais(8), 5, 10, asia));
+        mapa.add(new Casilla(oceanos.getPais(0), 5, 11, oceanos));
+
+        mapa.add(new Casilla(oceanos.getPais(0), 6, 1, oceanos));
+        mapa.add(new Casilla(americaDelSur.getPais(2), 6, 2, americaDelSur));
+        mapa.add(new Casilla(americaDelSur.getPais(1), 6, 3, americaDelSur));
+        mapa.add(new Casilla(oceanos.getPais(1), 6, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 6, 5, oceanos));
+        mapa.add(new Casilla(africa.getPais(2), 6, 6, africa));
+        mapa.add(new Casilla(africa.getPais(1), 6, 7, africa));
+        mapa.add(new Casilla(oceanos.getPais(0), 6, 8, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 6, 9, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(2), 6, 10, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 6, 11, oceanos));
+
+        mapa.add(new Casilla(oceanos.getPais(0), 7, 1, oceanos));
+        mapa.add(new Casilla(americaDelSur.getPais(0), 7, 2, americaDelSur));
+        mapa.add(new Casilla(oceanos.getPais(0), 7, 3, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 7, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 7, 5, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 7, 6, oceanos));
+        mapa.add(new Casilla(africa.getPais(5), 7, 7, africa));
+        mapa.add(new Casilla(africa.getPais(4), 7, 8, africa));
+        mapa.add(new Casilla(oceanos.getPais(0), 7, 9, oceanos));
+        mapa.add(new Casilla(australia.getPais(2), 7, 10, australia));
+        mapa.add(new Casilla(australia.getPais(3), 7, 11, australia));
+
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 1, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 2, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 3, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 4, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 5, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 6, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 7, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 8, oceanos));
+        mapa.add(new Casilla(oceanos.getPais(0), 8, 9, oceanos));
+        mapa.add(new Casilla(australia.getPais(0), 8, 10, australia));
+        mapa.add(new Casilla(australia.getPais(1), 8, 11, australia));
 
     }
 
@@ -309,6 +385,10 @@ class Continente {
                 paises.add(new Pais("Australia Oriental"));
                 break;
             case "Oceanos":
+                //Horizontales el 1
+                paises.add(new Pais("Oceano 1"));
+                //Verticales el 2
+                paises.add(new Pais("Oceano 2"));
                 break;
 
         }
@@ -426,7 +506,9 @@ class Pais {
                 || nombre.equals("Indonesia")
                 || nombre.equals("Nueva Guinea")
                 || nombre.equals("Australia Occidental")
-                || nombre.equals("Australia Oriental")) {
+                || nombre.equals("Australia Oriental")
+                || nombre.equals("Oceano 1")
+                || nombre.equals("Oceano 2")) {
             this.nombre = nombre;
         } else {
             System.out.println("No es un país");
@@ -566,6 +648,12 @@ class Pais {
                 break;
             case "Australia Oriental":
                 this.abreviatura = "AusOrient";
+                break;
+            case "Oceano 1":
+                this.abreviatura = "Oceano 1";
+                break;
+            case "Oceano 2":
+                this.abreviatura = "Oceano 2";
                 break;
         }
 
