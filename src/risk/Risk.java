@@ -27,6 +27,8 @@ public class Risk {
         // Para poder lanzar los métodos hace falta una instancia de la clase Main, en este caso, risk
         Menu menu = new Menu();
 
+        menu.inicializarContinentes();
+        menu.inicializarPaises();
         menu.crearMapa();
         menu.verMapa();
     }
@@ -99,126 +101,6 @@ public class Risk {
         dados = new Dados();
     }
 
-
-    /**
-     *
-     */
-    public void crearMapa() {
-        // Código necesario para crear el mapa
-        mapa = new ArrayList<>();
-
-        Continente asia = new Continente("Asia");
-        Continente africa = new Continente("África");
-        Continente europa = new Continente("Europa");
-        Continente americaDelNorte = new Continente("América del Norte");
-        Continente americaDelSur = new Continente("América del Sur");
-        Continente australia = new Continente("Australia");
-        Continente oceanos = new Continente("Océanos");
-
-        mapa.add(new Casilla(americaDelNorte.getPais(0), 1, 1,
-                americaDelNorte));
-        mapa.add(new Casilla(americaDelNorte.getPais(5), 1, 2,
-                americaDelNorte));
-        mapa.add(new Casilla(americaDelNorte.getPais(3), 1, 3,
-                americaDelNorte));
-        mapa.add(new Casilla(oceanos.getPais(1), 1, 4, oceanos));
-        mapa.add(new Casilla(europa.getPais(5), 1, 5, europa));
-        mapa.add(new Casilla(europa.getPais(0), 1, 6, europa));
-        mapa.add(new Casilla(asia.getPais(9), 1, 7, asia));
-        mapa.add(new Casilla(asia.getPais(11), 1, 8, asia));
-        mapa.add(new Casilla(asia.getPais(5), 1, 9, asia));
-        // Nota: distinguir los océanos con conexiones verticales, horizontales... ?
-        mapa.add(new Casilla(oceanos.getPais(1), 1, 10, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(1), 1, 11, oceanos));
-
-        mapa.add(new Casilla(americaDelNorte.getPais(1), 2, 1,
-                americaDelNorte));
-        mapa.add(new Casilla(americaDelNorte.getPais(4), 2, 2,
-                americaDelNorte));
-        mapa.add(new Casilla(americaDelNorte.getPais(5), 2, 3,
-                americaDelNorte));
-        mapa.add(new Casilla(oceanos.getPais(0), 2, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 2, 5, oceanos));
-        mapa.add(new Casilla(europa.getPais(4), 2, 6, europa));
-        mapa.add(new Casilla(europa.getPais(1), 2, 7, europa));
-        mapa.add(new Casilla(europa.getPais(6), 2, 8, europa));
-        mapa.add(new Casilla(asia.getPais(3), 2, 9, asia));
-        mapa.add(new Casilla(oceanos.getPais(0), 2, 10, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 2, 11, oceanos));
-
-        mapa.add(new Casilla(americaDelNorte.getPais(8), 3, 1, americaDelNorte));
-        mapa.add(new Casilla(americaDelNorte.getPais(7), 3, 2, americaDelNorte));
-        mapa.add(new Casilla(oceanos.getPais(0), 3, 3, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 3, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 3, 5, oceanos));
-        mapa.add(new Casilla(europa.getPais(3), 3, 6, europa));
-        mapa.add(new Casilla(europa.getPais(2), 3, 7, europa));
-        mapa.add(new Casilla(asia.getPais(10), 3, 8, asia));
-        mapa.add(new Casilla(asia.getPais(6), 3, 9, asia));
-        mapa.add(new Casilla(asia.getPais(4), 3, 10, asia));
-        mapa.add(new Casilla(oceanos.getPais(0), 3, 11, oceanos));
-
-        mapa.add(new Casilla(oceanos.getPais(0), 4, 1, oceanos));
-        mapa.add(new Casilla(americaDelNorte.getPais(2), 4, 2, americaDelNorte));
-        mapa.add(new Casilla(oceanos.getPais(0), 4, 3, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 4, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 4, 5, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(2), 4, 6, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(2), 4, 7, oceanos));
-        mapa.add(new Casilla(asia.getPais(0), 4, 8, asia));
-        mapa.add(new Casilla(asia.getPais(1), 4, 9, asia));
-        mapa.add(new Casilla(oceanos.getPais(0), 4, 10, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 4, 11, oceanos));
-
-        mapa.add(new Casilla(oceanos.getPais(0), 5, 1, oceanos));
-        mapa.add(new Casilla(americaDelSur.getPais(3), 5, 2, americaDelSur));
-        mapa.add(new Casilla(oceanos.getPais(0), 5, 3, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 5, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(1), 5, 5, oceanos));
-        mapa.add(new Casilla(africa.getPais(0), 5, 6, africa));
-        mapa.add(new Casilla(africa.getPais(3), 5, 7, africa));
-        mapa.add(new Casilla(asia.getPais(7), 5, 8, asia));
-        mapa.add(new Casilla(asia.getPais(2), 5, 9, asia));
-        mapa.add(new Casilla(asia.getPais(8), 5, 10, asia));
-        mapa.add(new Casilla(oceanos.getPais(0), 5, 11, oceanos));
-
-        mapa.add(new Casilla(oceanos.getPais(0), 6, 1, oceanos));
-        mapa.add(new Casilla(americaDelSur.getPais(2), 6, 2, americaDelSur));
-        mapa.add(new Casilla(americaDelSur.getPais(1), 6, 3, americaDelSur));
-        mapa.add(new Casilla(oceanos.getPais(1), 6, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 6, 5, oceanos));
-        mapa.add(new Casilla(africa.getPais(2), 6, 6, africa));
-        mapa.add(new Casilla(africa.getPais(1), 6, 7, africa));
-        mapa.add(new Casilla(oceanos.getPais(0), 6, 8, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 6, 9, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(2), 6, 10, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 6, 11, oceanos));
-
-        mapa.add(new Casilla(oceanos.getPais(0), 7, 1, oceanos));
-        mapa.add(new Casilla(americaDelSur.getPais(0), 7, 2, americaDelSur));
-        mapa.add(new Casilla(oceanos.getPais(0), 7, 3, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 7, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 7, 5, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 7, 6, oceanos));
-        mapa.add(new Casilla(africa.getPais(5), 7, 7, africa));
-        mapa.add(new Casilla(africa.getPais(4), 7, 8, africa));
-        mapa.add(new Casilla(oceanos.getPais(0), 7, 9, oceanos));
-        mapa.add(new Casilla(australia.getPais(2), 7, 10, australia));
-        mapa.add(new Casilla(australia.getPais(3), 7, 11, australia));
-
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 1, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 2, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 3, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 4, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 5, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 6, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 7, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 8, oceanos));
-        mapa.add(new Casilla(oceanos.getPais(0), 8, 9, oceanos));
-        mapa.add(new Casilla(australia.getPais(0), 8, 10, australia));
-        mapa.add(new Casilla(australia.getPais(1), 8, 11, australia));
-
-    }
 
     public void verMapa() {
         int i, j, k;
@@ -384,7 +266,8 @@ class Continente {
                 paises.add(new Pais("Australia Occidental"));
                 paises.add(new Pais("Australia Oriental"));
                 break;
-            case "Oceanos":
+            case "Océanos":
+                paises.add(new Pais("Oceano"));
                 //Horizontales el 1
                 paises.add(new Pais("Oceano 1"));
                 //Verticales el 2
@@ -398,20 +281,20 @@ class Continente {
         return paises;
     }
 
-    public Pais getPais(int i) {
+    public Pais getPaisAlf(int i) {
         return this.paises.get(i);
     }
 
 
-    public void setNombre(String nombreContinente) {
+    public void setNombre(String nombre) {
         if (nombre.equals("África")
                 || nombre.equals("Europa")
                 || nombre.equals("América del Norte")
                 || nombre.equals("América del Sur")
                 || nombre.equals("Australia")
                 || nombre.equals("Asia")
-                || nombre.equals("Oceanos")) {
-            this.nombre = nombreContinente;
+                || nombre.equals("Océanos")) {
+            this.nombre = nombre;
         } else {
             System.out.println("No es un continente");
         }
@@ -423,7 +306,7 @@ class Continente {
     }
 
     public void asignarColorContinente() {
-        switch (nombre) {
+        switch (this.nombre) {
             case "Asia":
                 this.color = "\033[4;36m";        // CYAN
                 break;
@@ -462,6 +345,19 @@ class Pais {
     public Pais(String nombre) {
         setNombre(nombre);
         setAbreviatura();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null){
+            return false;
+        }
+
+        if (!(o instanceof Pais)){
+            return false;
+        }
+        Pais oPais = (Pais) o;
+        return (this.nombre == oPais.nombre);
     }
 
     public void setNombre(String nombre) {
@@ -507,6 +403,7 @@ class Pais {
                 || nombre.equals("Nueva Guinea")
                 || nombre.equals("Australia Occidental")
                 || nombre.equals("Australia Oriental")
+                || nombre.equals("Oceano")
                 || nombre.equals("Oceano 1")
                 || nombre.equals("Oceano 2")) {
             this.nombre = nombre;
@@ -649,6 +546,9 @@ class Pais {
             case "Australia Oriental":
                 this.abreviatura = "AusOrient";
                 break;
+            case "Oceano":
+                this.abreviatura = "Oceano";
+                break;
             case "Oceano 1":
                 this.abreviatura = "Oceano 1";
                 break;
@@ -658,7 +558,6 @@ class Pais {
         }
 
     }
-
 
     public String getAbreviatura() {
         return abreviatura;
@@ -689,7 +588,7 @@ class Casilla {
     // private Jugador ocupante;       // Jugador que está ocupando la casilla actualmente
     private int numEjercitos;       // El número de ejércitos que ocupan actualmente la casilla
 
-    Casilla(Pais pais, int fila, int col, Continente lugar) {
+    Casilla(Pais pais , Continente lugar, int fila, int col) {
         // Es necesario pasar los atributos fila y col teniendo el nombre del pais? O sería mejor un switch aquí
         this.pais = pais;
         this.fila = fila;
@@ -718,6 +617,8 @@ class Casilla {
         return this.numEjercitos;
     }
 
+    public Pais getPais(){return this.pais;}
+
     /*
     public void ocuparCasilla(Jugador jugador){
         this.ocupante = jugador;
@@ -730,11 +631,11 @@ class Casilla {
 class Jugador {
 
     private String nombre;
-    private Color color;
+    private String color;
     private int numEjercitos;   // No estoy segura de si esto haría falta, lo dejo de momento
     private ArrayList<Pais> paises;     // Países controlados por el jugador
 
-    Jugador(String nombre, Color color) {
+    Jugador(String nombre, String color) {
         this.nombre = nombre;
         this.color = color;
         paises = new ArrayList<Pais>();
@@ -749,7 +650,7 @@ class Jugador {
         return this.nombre;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return this.color;
     }
 
