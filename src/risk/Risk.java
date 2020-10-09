@@ -442,89 +442,131 @@ class Pais {
         switch (this.nombre) {
             case "Afganistan":
                 this.abreviatura = "Afgan";
+                break;
 
             case "China":
                 this.abreviatura = "China";
+                break;
             case "India":
                 this.abreviatura = "India";
+                break;
             case "Irkutsk":
                 this.abreviatura = "Irkutsk";
+                break;
             case "Japón":
                 this.abreviatura = "Japón";
+                break;
             case "Kamchatka":
                 this.abreviatura = "Kamchatka";
+                break;
             case "Mongolia":
                 this.abreviatura = "Mongolia";
+                break;
             case "Oriente Medio":
                 this.abreviatura = "OMedio";
+                break;
             case "Siberia":
                 this.abreviatura = "Siberia";
+                break;
             case "Sudeste Asiático":
                 this.abreviatura = "SAsiático";
+                break;
             case "Urales":
                 this.abreviatura = "Urales";
+                break;
             case "Yakutsk":
                 this.abreviatura = "Yakutsk";
+                break;
             case "África del Norte":
                 this.abreviatura = "ANorte";
+                break;
             case "África Oriental":
                 this.abreviatura = "AOriental";
+                break;
             case "Congo":
                 this.abreviatura = "Congo";
+                break;
             case "Egipto":
                 this.abreviatura = "Egipto";
+                break;
             case "Madagascar":
                 this.abreviatura = "Madagasca";
+                break;
             case "Sudáfrica":
                 this.abreviatura = "Sudáfrica";
+                break;
             case "Escandinavia":
                 this.abreviatura = "Escandina";
+                break;
             case "Europa del Norte":
                 this.abreviatura = "EurNorte";
+                break;
             case "Europa Occidental":
                 this.abreviatura = "EurOcc";
+                break;
             case "Europa del Sur":
                 this.abreviatura = "EurSur";
+                break;
             case "Gran Bretaña":
                 this.abreviatura = "GBretaña";
+                break;
             case "Islandia":
                 this.abreviatura = "Islandia";
+                break;
             case "Rusia":
                 this.abreviatura = "Rusia";
+                break;
             case "Alaska":
                 this.abreviatura = "Alaska";
+                break;
             case "Alberta":
                 this.abreviatura = "Alberta";
+                break;
             case "América Central":
                 this.abreviatura = "AmeCentral";
+                break;
             case "Groenlandia":
                 this.abreviatura = "Groenlan";
+                break;
             case "Ontario":
                 this.abreviatura = "Ontario";
+                break;
             case "Quebec":
                 this.abreviatura = "Quebec";
+                break;
             case "Territorios del Noroeste":
                 this.abreviatura = "TNoroeste";
+                break;
             case "Estados Unidos del Este":
                 this.abreviatura = "USAEste";
+                break;
             case "Estados Unidos del Oeste":
                 this.abreviatura = "USAOeste";
+                break;
             case "Venezuela":
                 this.abreviatura = "Venezuela";
+                break;
             case "Perú":
                 this.abreviatura = "Perú";
+                break;
             case "Brasil":
                 this.abreviatura = "Brasil";
+                break;
             case "Argentina":
                 this.abreviatura = "Argentina";
+                break;
             case "Indonesia":
                 this.abreviatura = "Indonesia";
+                break;
             case "Nueva Guinea":
                 this.abreviatura = "NGuinea";
+                break;
             case "Australia Occidental":
                 this.abreviatura = "AusOccid";
+                break;
             case "Australia Oriental":
                 this.abreviatura = "AusOrient";
+                break;
         }
 
     }
