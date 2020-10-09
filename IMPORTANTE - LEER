@@ -9,6 +9,7 @@ He cambiado bastante la estructura del código por lo que estuve hablando con Iv
 7. Iván me había dicho que él había implementado Mapa como una clase aparte, pero de momento no lo veo necesario. Quizás más adelante.
 8. El profesor de prácticas no me respondió al correo.
 9. VerMapa() funciona al 99%. Lo único que falta es darle color a los números de los ejércitos, pero para eso es mejor empezar antes con las funciones de jugadores.
-10. Cuando hayas leído esto y visto el código, mándame un mensaje y dividimos las funciones de crearJugadores, repartirEjércitos, etc.
+10. El archivo .txt ha cambiado para adecuarse al código. Lo dejo subido.
+11. Cuando hayas leído esto y visto el código, mándame un mensaje y dividimos las funciones de crearJugadores, repartirEjércitos, etc.
 
 TL;DR: Muchos cambios. VerMapa() acabado. Hablar con Xiana para repartir trabajo.
