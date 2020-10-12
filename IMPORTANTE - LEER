@@ -1,0 +1,15 @@
+He cambiado bastante la estructura del código por lo que estuve hablando con Iván. Recomiendo revisar bien todo el código, pero el resumen es:
+
+1. La clase Casilla ha desaparecido. Al parecer en el resto de grupos de prácticas ni la mencionaron, y todo es mucho más sencillo sin ella.
+2. El constructor de Pais ahora utiliza los parámetros abreviatura, continente, fila y columna. Esto es para sustituir a Casilla y por (3)
+3. Ya no hay 88 líneas de código para crear el mapa. Se lee del fichero, se pasa la abreviatura, continente, fila y columna al constructor de país, y se hace un bucle.
+4. setNombre() y setAbreviatura de Pais se han intercambiado por los motivos (2) y (3)
+5. Al crear un continente ya no se crean automaticamente sus países, sino que se añaden a mano. En realidad, esto simplifica las cosas en la función crearMapa()
+6. Se han creado files separados para cada una de las clases más importantes para mejorar la claridad del código.
+7. Iván me había dicho que él había implementado Mapa como una clase aparte, pero de momento no lo veo necesario. Quizás más adelante.
+8. El profesor de prácticas no me respondió al correo.
+9. VerMapa() funciona al 99%. Lo único que falta es darle color a los números de los ejércitos, pero para eso es mejor empezar antes con las funciones de jugadores.
+10. El archivo .txt ha cambiado para adecuarse al código. Lo dejo subido.
+11. Cuando hayas leído esto y visto el código, mándame un mensaje y dividimos las funciones de crearJugadores, repartirEjércitos, etc.
+
+TL;DR: Muchos cambios. VerMapa() acabado. Hablar con Xiana para repartir trabajo.
