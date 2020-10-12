@@ -32,7 +32,7 @@ Mongolia asia 3 9
 Japón asia 3 10
 Océano océanos 3 11
 Océano océanos 4 1
-AmeCentral americaDelNorte 4 2
+AmeCentra americaDelNorte 4 2
 Océano océanos 4 3
 Océano océanos 4 4
 Océano océanos 4 5
@@ -70,8 +70,8 @@ Océano océanos 7 3
 Océano océanos 7 4
 Océano océanos 7 5
 Océano océanos 7 6
-Sudáfrica americaDelSur 7 7
-Madagasca americaDelSur 7 8
+Sudáfrica africa 7 7
+Madagasca africa 7 8
 Océano océanos 7 9
 Indonesia australia 7 10
 NGuinea australia 7 11

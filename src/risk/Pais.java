@@ -27,6 +27,22 @@ class Pais {
         return this.numEjercitos;
     }
 
+    public void setNumEjercitos(int numTropas){
+        numEjercitos = numTropas;
+    }
+
+    public void añadirEjercitos(int numTropas){
+        numEjercitos += numTropas;
+    }
+
+    public void quitarEjercitos(int numTropas){
+        numEjercitos -= numTropas;
+    }
+
+    public boolean estaOcupado(){
+        return numEjercitos > 0;
+    }
+
     public int getFila() {
         return this.fila;
     }
@@ -118,7 +134,7 @@ class Pais {
             case "Alberta":
                 this.nombre = "Alberta";
                 break;
-            case "AmeCentral":
+            case "AmeCentra":
                 this.nombre = "América Central";
                 break;
             case "Groenlan":
@@ -209,7 +225,7 @@ class Pais {
                 || abreviatura.equals("Rusia")
                 || abreviatura.equals("Alaska")
                 || abreviatura.equals("Alberta")
-                || abreviatura.equals("AmeCentral")
+                || abreviatura.equals("AmeCentra")
                 || abreviatura.equals("Groenlan")
                 || abreviatura.equals("Ontario")
                 || abreviatura.equals("Quebec")
@@ -250,8 +266,6 @@ class Pais {
         switch (this.abreviatura){
             case "Océano":
                 return "";
-            case "AmeCentral":
-                return "AmeCentra";
             default:
                 return this.abreviatura;
         }

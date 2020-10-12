@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /* Hacer cabecera */
 
@@ -18,9 +19,9 @@ public class Menu {
     // el mapa o los jugadores
 
     private ArrayList<Pais> mapa;
-    private ArrayList<Jugador> jugadores;
+    private HashMap<String, Jugador> jugadores;
     private HashMap<String, Pais> paises;
-    private HashMap<String,Continente> continentes;
+    private HashMap<String, Continente> continentes;
 
 
     // TODO: preguntar por toString de AmeCentral
@@ -105,23 +106,10 @@ public class Menu {
             excepcion.printStackTrace();
         }
         */
-    }
 
-    /**
-     *
-     * @param file
-     */
-    public void asignarPaises(File file) {
-        // Código necesario para asignar países
-    }
-
-    /**
-     *
-     * @param nombrePais
-     * @param nombreJugador
-     */
-    public void asignarPaises(String nombrePais, String nombreJugador) {
-        // Código necesario para asignar un país a un jugador
+        jugadores = new HashMap<>();
+        paises = new HashMap<>();
+        // Poner aquí también el new de continentes?
     }
 
     /**
@@ -254,23 +242,38 @@ public class Menu {
             System.out.print("\n");
         }
     }
-    private void crearJugador(File file) {
+
+
+    public void crearJugador(String nombre, String color) {
+        // Código necesario para crear a un jugador a partir de su nombre y color
+        Jugador jugador = new Jugador(nombre, color);
+        jugadores.put(nombre, jugador);
+
+        System.out.println("{");
+        System.out.println("  nombre: \"" + nombre + "\",");
+        System.out.println("  color: \"" + color + "\"");
+        System.out.println("}");
+    }
+
+    /**
+     *
+     * @param file
+     */
+    public void crearJugador(String file) {
         // Código necesario para crear a los jugadores del RISK
 
         String linea = null;
         BufferedReader bufferLector = null;
 
         try{
-            File fichero = new File("jugadores.csv");
+            File fichero = new File(file);
             FileReader lector = new FileReader(fichero);
             bufferLector = new BufferedReader(lector);
 
             while ((linea = bufferLector.readLine()) != null){
-                String[] infoJug = linea.split(" ");
+                String[] infoJug = linea.split(";");
                 if (infoJug.length == 2) {
-                    Jugador jugador = new Jugador(infoJug[0], infoJug[1]);
-                    // Preguntar??
-                    jugadores.add(jugador);
+                    crearJugador(infoJug[0], infoJug[1]);
                 } else {
                     System.out.println("NO");
                 }
@@ -285,12 +288,210 @@ public class Menu {
 
     /**
      *
+     * @param nombrePais
+     * @param nombreJugador
+     */
+    public void asignarPaises(String nombrePais, String nombreJugador){
+        // Código necesario para asignar un país a un jugador
+
+        Jugador jugador = jugadores.get(nombreJugador);
+        Pais pais = paises.get(nombrePais);
+
+        jugador.asignarPais(pais);
+
+        // RESULTADO OK
+        System.out.println("{");
+        System.out.println("  nombre: \"" + jugador.getNombre() + "\",");
+        System.out.println("  pais: \"" + pais.getNombre() + "\",");
+        System.out.println("  continente: \"" + pais.getContinente().getNombre() + "\",");
+        //TODO: Frontera
+        System.out.println("}");
+    }
+
+    /**
+     *
      * @param file
      */
-    private void crearJugador(String nombre, String color) {
-        // Código necesario para crear a un jugador a partir de su nombre y color
-        Jugador jugador = new Jugador(nombre, color);
-        // Preguntar??
-        jugadores.add(jugador);
+    public void asignarPaises(String file){
+        // Código necesario para asignar países
+
+
+        String linea = null;
+        BufferedReader bufferLector = null;
+
+        try{
+            File fichero = new File(file);
+            FileReader lector = new FileReader(fichero);
+            bufferLector = new BufferedReader(lector);
+
+            while ((linea = bufferLector.readLine()) != null){
+                String[] info = linea.split(";");
+                if (info.length == 2) {
+                    // La llamada a asignar no necesita objeto porque Java implícitamente asume que el objeto es this
+                    asignarPaises(info[1], info[0]);
+                } else {
+                    System.out.println("NO");
+                }
+            }
+
+            bufferLector.close();
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void asignarMisiones(String nombreJugador, String idMision){
+        Jugador jugador = jugadores.get(nombreJugador);
+        jugador.setMision(idMision);
+
+        System.out.println("{");
+        System.out.println("  nombre: \"" + nombreJugador + "\",");
+        System.out.println("  mision: \"");
+        explicarMision(idMision);
+        System.out.print("\"");
+        System.out.println("}");
+    }
+
+    public void explicarMision(String idMision){
+        // Recibe el id de la misión e imprime en qué consiste
+        switch (idMision){
+            // En Java creo que se pueden hacer switches en Strings
+            default:
+                System.out.print("la misión es x");
+                break;
+        }
+    }
+
+    public void asignarMisiones(String file){
+
+        String linea = null;
+        BufferedReader bufferLector = null;
+
+        try{
+            File fichero = new File(file);
+            FileReader lector = new FileReader(fichero);
+            bufferLector = new BufferedReader(lector);
+
+            while ((linea = bufferLector.readLine()) != null){
+                String[] infoMision = linea.split(";");
+                if (infoMision.length == 2) {
+                    asignarMisiones(infoMision[0], infoMision[1]);
+                } else {
+                    System.out.println("NO");
+                }
+            }
+
+            bufferLector.close();
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void repartirEjercitos(Jugador jugador, String numero, String nombrePais){
+        int numFinal = Integer.parseInt(numero);
+
+        if (numFinal >= jugador.getNumEjercitos()){
+            numFinal = jugador.getNumEjercitos();
+        }
+
+        paises.get(nombrePais).setNumEjercitos(numFinal);
+
+        System.out.println("{");
+        System.out.println("  pais: \"" + nombrePais + "\",");
+        System.out.println("  jugador: \"" + jugador.getNombre() + "\",");
+        System.out.println("  numeroEjercitosAsignados: " + numFinal + ",");
+        System.out.println("  numeroEjercitosTotales: " + paises.get(nombrePais).getNumEjercitos() + ",");
+
+        System.out.println("  paisesOcupadosContinente: [");
+        // ?????????????????????
+
+    }
+
+    public void resultadoError(int codigo){
+        switch (codigo){
+            case 99:
+                System.out.println("Comando no permitido en este momento");
+                break;
+            case 100:
+                System.out.println("Color no permitido");
+                break;
+            case 101:
+                System.out.println("Comando incorrecto");
+                break;
+            case 102:
+                System.out.println("El continente no existe");
+                break;
+            case 103:
+                System.out.println("El jugador no existe");
+                break;
+            case 104:
+                System.out.println("El jugador ya existe");
+                break;
+            case 105:
+                System.out.println("Los jugadores no están creados");
+                break;
+            case 106:
+                System.out.println("El mapa no está creado");
+                break;
+            case 107:
+                System.out.println("El mapa ya ha sido creado");
+                break;
+            case 109:
+                System.out.println("El país no existe");
+                break;
+            case 110:
+                System.out.println("El país no pertenece al jugador");
+                break;
+            case 111:
+                System.out.println("El país pertenece al jugador");
+                break;
+            case 112:
+                System.out.println("Los países no son frontera");
+                break;
+            case 113:
+                System.out.println("El país ya está asignado");
+                break;
+            case 114:
+                System.out.println("El color ya está asignado");
+                break;
+            case 115:
+                System.out.println("La misión ya está asignada");
+                break;
+            case 116:
+                System.out.println("La misión no existe");
+                break;
+            case 117:
+                System.out.println("El jugador ya tiene asignada una misión");
+                break;
+            case 118:
+                System.out.println("Las misiones no están asignadas");
+                break;
+            case 119:
+                System.out.println("Ejércitos no disponibles");
+                break;
+            case 120:
+                System.out.println("No hay cartas suficientes");
+                break;
+            case 121:
+                System.out.println("No hay configuración de cambio");
+                break;
+            case 122:
+                System.out.println("Algunas cartas no pertenecen al jugador");
+                break;
+            case 123:
+                System.out.println("Algunas cartas no existen");
+                break;
+            case 124:
+                System.out.println("No hay ejércitos suficientes");
+                break;
+            case 125:
+                System.out.println("El identificador no sigue el formato correcto");
+                break;
+            case 126:
+                System.out.println("Carta de equipamiento ya asignada");
+                break;
+        }
     }
 }

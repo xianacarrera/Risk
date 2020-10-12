@@ -2,18 +2,29 @@ package risk;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 class Jugador {
 
     private String nombre;
     private String color;
+    private String mision;
     private int numEjercitos;   // No estoy segura de si esto haría falta, lo dejo de momento
-    private ArrayList<Pais> paises;     // Países controlados por el jugador
+    private HashMap<String, Pais> paises;     // Países controlados por el jugador
 
     Jugador(String nombre, String color) {
         this.nombre = nombre;
         this.color = color;
-        paises = new ArrayList<Pais>();
+        paises = new HashMap<String, Pais>();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     @Override
@@ -21,27 +32,32 @@ class Jugador {
         return "Jugador: " + nombre + ", color: " + color;
     }
 
-    public String getNombre() {
-        return this.nombre;
+    public String getMision(){
+        return mision;
     }
 
-    public String getColor() {
-        return this.color;
+    public void setMision(String mision){
+        this.mision = mision;
     }
 
     public int getNumEjercitos() {
-        return this.numEjercitos;
+        return numEjercitos;
     }
 
-    public void cambiarEjercito(int numTropas) {
-        /* El nombre es un poco ambiguo (de primeras añadirEjercito o algo así quedaría mejor), pero esta función
-            se puede reutilizar para RESTAR tropas. Si un jugador pierde tropas, se le puede pasar un número negativo
-            y ya. Haría falta poner un if para que el número de tropas no pueda ser negativo (si llega a 0, creo
-            que el jugador pierde y punto).
-        */
+    public void setNumEjercitos(int numTropas){
+        numEjercitos = numTropas;
+    }
 
+    public void aumentarEjercito(int numTropas) {
         numEjercitos += numTropas;
     }
 
+    public void reducirEjercito(int numTropas){
+        numEjercitos -= numTropas;
+    }
+
+    public void asignarPais(Pais pais){
+        paises.put(pais.getAbreviatura(), pais);
+    }
 
 }
