@@ -391,7 +391,7 @@ public class Menu {
     public void repartirEjercitos(Jugador jugador, String numero, String nombrePais){
         int numFinal = Integer.parseInt(numero);
 
-        if (numFinal >= jugador.getNumEjercitos()){
+        if (numFinal > jugador.getNumEjercitos()){
             numFinal = jugador.getNumEjercitos();
         }
 
