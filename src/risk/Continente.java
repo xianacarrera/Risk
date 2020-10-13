@@ -1,17 +1,75 @@
 package risk;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class Continente {
     //Atributos
     private String nombre;
+    private String abreviatura;
     private int numeroEjercitos;
+    private int rearme;
     private String color;
     private ArrayList<Pais> paises;
+    private HashMap<String, Jugador> jugadores;
+
 
     Continente(String nombre) {
         setNombre(nombre);
+        setAbreviatura();
         asignarColorContinente();
+        paises = new ArrayList<>();
+        jugadores = new HashMap<>();
+    }
+
+    @Override
+    public String toString() {
+        String textoJugadores = "";     // Por qué poner aquí new String() ?? -> ver tema 1
+        for (int i = 0; i < jugadores.size(); i++){
+            if (i == 0){
+                textoJugadores += " { \"" + jugadores.get(i).getNombre() + "\", " + jugadores.get(i).getNumEjercitos()
+                        + " },\n";
+            } else if (i != jugadores.size() - 1){
+                textoJugadores += "\t\t\t{ \"" + jugadores.get(i).getNombre() + "\", " +
+                        jugadores.get(i).getNumEjercitos() + " },\n";
+            } else {
+                textoJugadores += "\t\t\t{ \"" + jugadores.get(i).getNombre() + "\", " +
+                        jugadores.get(i).getNumEjercitos() + " }\n";
+            }
+        }
+
+        String mensaje =
+                "{\n" +
+                "  nombre: \""          + nombre            + "\",\n"   +
+                "  abreviatura: \""     + abreviatura       + "\",\n"   +
+                "  jugadores: ["        + textoJugadores    +
+                "\t\t],\n"              +
+                "  numeroEjercitos: "   + numeroEjercitos   + ",\n"     +
+                "  rearmeContinente: "  + rearme            + "\n"      +
+                "}\n";
+
+        return mensaje;
+    }
+
+    public void setAbreviatura(){
+        switch (nombre){
+            case "América del Norte":
+                abreviatura = "AméricaNorte";
+                break;
+            case "América del Sur":
+                abreviatura = "AméricaSur";
+                break;
+            case "Europa":
+            case "África":
+            case "Asia":
+            case "Australia":
+                abreviatura = nombre;
+                break;
+        }
+    }
+
+    public void añadirJugador(String nombreJug, Jugador jugador){
+        jugadores.put(nombreJug, jugador);
     }
 
     public String getNombre() {
@@ -19,7 +77,7 @@ class Continente {
     }
 
     public void guardarPaises(Pais pais){
-        paises = new ArrayList<>();
+        // Implementarlo con un HashMap ?
         paises.add(pais);
     }
 

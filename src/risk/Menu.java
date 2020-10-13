@@ -127,8 +127,6 @@ public class Menu {
     }
 
 
-
-
     public void crearMapa() {
         // Código necesario para crear el mapa
 
@@ -313,7 +311,6 @@ public class Menu {
      */
     public void asignarPaises(String file){
         // Código necesario para asignar países
-
 
         String linea = null;
         BufferedReader bufferLector = null;

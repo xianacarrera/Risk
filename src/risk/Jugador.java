@@ -4,6 +4,7 @@ package risk;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 class Jugador {
 
@@ -11,6 +12,7 @@ class Jugador {
     private String color;
     private String mision;
     private int numEjercitos;   // No estoy segura de si esto haría falta, lo dejo de momento
+    private int numEjercitosRearmar;
     private HashMap<String, Pais> paises;     // Países controlados por el jugador
 
     Jugador(String nombre, String color) {
@@ -29,8 +31,33 @@ class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador: " + nombre + ", color: " + color;
+        return "jugador: " + nombre + ", color: " + color;
     }
+
+    /*
+    @Override
+    public String toString() {
+        String textoPaises = "";
+        // Orden?
+
+        String mensaje =
+                "{\n" +
+                "  nombre: \""                  + nombre                 + "\",\n" +
+                "  color: \""                   + color                  + "\",\n" +
+                "  mision:  \""                 + mision                 + "\",\n" +
+                "  numeroEjercitos: "           + numEjercitos           + ",\n"   +
+                "  paises: ["                   + textoPaises            +
+                "\t\t\t],\n"                    +
+                "  continentes: ["              + textoContinentes       +
+                "\t\t\t],\n"                    +
+                "  cartas: \""                  + textoCartas            + "\",\n" +
+                "  numeroEjercitosRearmar: "    + numEjercitosRearmar    + ",\n"   +
+                "}\n";
+
+        return mensaje;
+    }
+    */
+
 
     public String getMision(){
         return mision;

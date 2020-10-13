@@ -9,7 +9,9 @@ class Pais {
     private int fila;
     private int col;
     private Continente continente;
+    private Jugador jugador;
     private int numEjercitos;
+    private int numVecesOcupado;
 
     public Pais(String abreviatura, Continente continente, int fila, int col) {
         setAbreviatura(abreviatura);
@@ -18,6 +20,8 @@ class Pais {
         this.fila = fila;
         this.col = col;
     }
+
+
 
     public Continente getContinente() {
         return this.continente;
@@ -270,5 +274,26 @@ class Pais {
                 return this.abreviatura;
         }
     }
+
+    /*
+    public String toString(){
+        String textoFrontera = "";
+
+
+        String mensaje =
+                "{\n" +
+                "  nombre: \""              + nombre                    + "\",\n" +
+                "  abreviatura: \""         + abreviatura               + "\",\n" +
+                "  continente:  \""         + continente.getNombre()    + "\",\n" +
+                "  frontera: ["             + textoFrontera             +
+                "\t\t\t],\n"                +
+                "  jugador: \""             + jugador.getNombre()       + "\",\n" +
+                "  numeroEjercitos: "       + numEjercitos              + ",\n"   +
+                "  numeroVecesOcupado: "    + numVecesOcupado           + "\n"    +
+                "}\n";
+
+        return mensaje;
+    }
+     */
 
 }
