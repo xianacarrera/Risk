@@ -21,7 +21,13 @@ class Pais {
         this.col = col;
     }
 
-
+    public void asignarFronteras(){
+        switch (nombre){
+            case "Africa":
+                HAs
+                break;
+        }
+    }
 
     public Continente getContinente() {
         return this.continente;

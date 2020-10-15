@@ -341,6 +341,51 @@ public class Menu {
         Jugador jugador = jugadores.get(nombreJugador);
         jugador.setMision(idMision);
 
+        if (idMision == "M41" || idMision == "M42" || idMision == "M43" || idMision == "M44" || idMision == "M45"
+                || idMision == "M46"){
+            ArrayList<String> colores = new ArrayList<>();
+
+            for (Jugador jug : jugadores.values()){
+                colores.add(jug.getColor());
+            }
+
+            switch(idMision){
+                case "M41":
+                    if (!colores.contains("AMARILLO") || jugador.getColor() == "AMARILLO"){
+                        idMision = "M1";
+                    }
+                    break;
+                case "M42":
+                    if (!colores.contains("AZUL") || jugador.getColor() == "AZUL"){
+                        idMision = "M1";
+                    }
+                    break;
+                case "M43":
+                    if (!colores.contains("CYAN") || jugador.getColor() == "CYAN"){
+                        idMision = "M1";
+                    }
+                    break;
+                case "M44":
+                    if (!colores.contains("ROJO") || jugador.getColor() == "ROJO"){
+                        idMision = "M1";
+                    }
+                    break;
+                case "M45":
+                    if (!colores.contains("VERDE") || jugador.getColor() == "VERDE"){
+                        idMision = "M1";
+                    }
+                    break;
+                case "M46":
+                    if (!colores.contains("VIOLETA") || jugador.getColor() == "VIOLETA"){
+                        idMision = "M1";
+                    }
+                    break;
+            }
+        }
+
+
+
+
         System.out.println("{");
         System.out.println("  nombre: \"" + nombreJugador + "\",");
         System.out.println("  mision: \"");
@@ -349,14 +394,51 @@ public class Menu {
         System.out.println("}");
     }
 
-    public void explicarMision(String idMision){
+    public String explicarMision(String idMision){
         // Recibe el id de la misión e imprime en qué consiste
+        String mision;
+
         switch (idMision){
-            // En Java creo que se pueden hacer switches en Strings
-            default:
-                System.out.print("la misión es x");
+            case "M1":
+                mision = "Conquistar 24 países de la preferencia del jugador";
                 break;
+            case "M2":
+                mision = "Conquistar 18 países de la preferencia del jugador con un mínimo de dos ejércitos";
+                break;
+            case "M31":
+                mision = "Conquistar Asia y América del Sur";
+                break;
+            case "M32":
+                mision = "Conquistar Asia y África";
+                break;
+            case "M33":
+                mision = "Conquistar América del Norte y África";
+                break;
+            case "M34":
+                mision = "Conquistar América del Norte y Oceanía";
+                break;
+            case "M41":
+                mision = "Destruir el ejército AMARILLO";
+                break;
+            case "M42":
+                mision = "Destruir el ejército AZUL";
+                break;
+            case "M43":
+                mision = "Destruir el ejército CYAN";
+                break;
+            case "M44":
+                mision = "Destruir el ejército ROJO";
+                break;
+            case "M45":
+                mision = "Destruir el ejército VERDE";
+                break;
+            case "M46":
+                mision = "Destruir el ejército VIOLETA";
+                break;
+            default:
+                mision = "";
         }
+        return mision;
     }
 
     public void asignarMisiones(String file){
