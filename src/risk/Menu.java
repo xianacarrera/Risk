@@ -116,8 +116,6 @@ public class Menu {
         String linea = null;
         BufferedReader bufferLector = null;
 
-        // TODO: preguntar si hacer mapa una Clase con un HashMap y un ArrayList dentro
-
         try{
             File fichero = new File("Mapa.txt");
             FileReader lector = new FileReader(fichero);
