@@ -62,7 +62,7 @@ class Continente {
             case "Europa":
             case "África":
             case "Asia":
-            case "Australia":
+            case "Oceanía":
                 abreviatura = nombre;
                 break;
         }
@@ -76,11 +76,11 @@ class Continente {
         return this.nombre;
     }
 
-    public void guardarPaises(Pais pais){
-        // Implementarlo con un HashMap ?
+    public void guardarPais(Pais pais){
         paises.add(pais);
     }
 
+    // ?????
     public ArrayList<Pais> getPaises() {
         return paises;
     }
@@ -95,9 +95,8 @@ class Continente {
                 || nombre.equals("Europa")
                 || nombre.equals("América del Norte")
                 || nombre.equals("América del Sur")
-                || nombre.equals("Australia")
-                || nombre.equals("Asia")
-                || nombre.equals("Océanos")) {
+                || nombre.equals("Oceanía")
+                || nombre.equals("Asia")) {
             this.nombre = nombre;
         } else {
             System.out.println("No es un continente");
@@ -126,11 +125,8 @@ class Continente {
             case "América del Sur":
                 this.color = "\033[41m";        // ROJO
                 break;
-            case "Australia":
+            case "Oceanía":
                 this.color = "\033[44m";        // AZUL
-                break;
-            case "Océanos":
-                this.color = "\033[0m";       // RESET
                 break;
             //No hay default porque esto ya se comprueba en setNombre
 

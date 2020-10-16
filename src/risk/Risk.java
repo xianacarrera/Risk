@@ -13,7 +13,6 @@ public class Risk {
         // Para poder lanzar los métodos hace falta una instancia de la clase Main, en este caso, risk
         Menu menu = new Menu();
 
-        menu.inicializarContinentes();
         menu.crearMapa();
         menu.verMapa();
 

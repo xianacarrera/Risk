@@ -17,10 +17,9 @@ public class Menu {
     // necesario acceder durante la ejecución del programa como, por ejemplo,
     // el mapa o los jugadores
 
-    private ArrayList<Pais> mapa;
     private HashMap<String, Jugador> jugadores;
-    private HashMap<String, Pais> paises;
-    private HashMap<String, Continente> continentes;
+
+    private Mapa mapa;
 
 
     // TODO: preguntar por toString de AmeCentral
@@ -107,31 +106,12 @@ public class Menu {
         */
 
         jugadores = new HashMap<>();
-        paises = new HashMap<>();
-        // Poner aquí también el new de continentes?
-    }
-
-    /**
-     *
-     */
-    public void inicializarContinentes(){
-        continentes = new HashMap<String, Continente>();
-
-        continentes.put("asia", new Continente("Asia"));
-        continentes.put("africa", new Continente("África"));
-        continentes.put("europa", new Continente("Europa"));
-        continentes.put("americaDelNorte", new Continente("América del Norte"));
-        continentes.put("americaDelSur", new Continente("América del Sur"));
-        continentes.put("australia", new Continente("Australia"));
-        continentes.put("océanos", new Continente("Océanos"));
     }
 
 
     public void crearMapa() {
         // Código necesario para crear el mapa
-
-        paises = new HashMap<>();
-        mapa = new ArrayList<>();
+        mapa = new Mapa();
 
         String linea = null;
         BufferedReader bufferLector = null;
@@ -146,10 +126,8 @@ public class Menu {
             while ((linea = bufferLector.readLine()) != null){
                 String[] infoPais = linea.split(" ");
                 if (infoPais.length == 4) {
-                    paises.put(infoPais[0], new Pais(infoPais[0], continentes.get(infoPais[1]),
-                            Integer.parseInt(infoPais[2]), Integer.parseInt(infoPais[3])));
-                    continentes.get(infoPais[1]).guardarPaises(paises.get(infoPais[0]));
-                    mapa.add(paises.get(infoPais[0]));
+                    mapa.generarPais(infoPais[0], infoPais[1], Integer.parseInt(infoPais[2]),
+                            Integer.parseInt(infoPais[3]));
                 } else {
                     System.out.println("NO");
                 }
@@ -164,80 +142,7 @@ public class Menu {
     }
 
     public void verMapa(){
-        int i, j, k;        // Índices de recorrido
-        Pais tempPais;      // Variable temporal para almacenar un país
-        String tempEj;      // Variable temporal para almacenar un número de ejércitos
-
-        // Línea inicial |-----|----|----| ...
-        System.out.print("|");
-        for(j = 0; j < 11; j++){
-            System.out.print("===========|");
-        }
-        System.out.print("\n");
-
-        // 8x11 casillas
-        for(i = 0; i < 8; i++){
-            System.out.print("|");   // Primer carácter
-            for(j = 0; j < 11; j++){
-                tempPais = mapa.get(i * 11 + j);     // Almacena el país de la casilla i x j
-
-                if (tempPais.getNombre().equals("Océano1")){            // Línea roja horizontal
-                    System.out.print("\033[0;31m-----------\033[0m");
-                } else if (tempPais.getNombre().equals("Océano2")) {    // Línea roja vertical
-                    System.out.print("\033[0;31m     |     \033[0m");
-                } else {
-                    System.out.print(" " +
-                            tempPais.getContinente().getColor() + tempPais.toString());
-                    // Imprime un espacio y el nombre del país con su color como fondo
-                    for (k = 0; k < (9 - tempPais.toString().length()); k++) {
-                        System.out.print(" ");          // Imprime los espacios que falten para llegar a 9 con color
-                    }
-                    System.out.print("\033[0m ");       // Espacio final (sin color de fondo)
-                }
-
-                if ((i == 4 && j == 3) || (i == 5 && j == 3)){
-                    System.out.print("\033[0;31m");      // Pone la barra roja
-                }
-                System.out.print("|");      // Barra entre casillas
-            }
-            System.out.print("\n|");
-            for(j = 0; j < 11; j++){
-                // valueOf convierte int a String
-                tempPais = mapa.get(i * 11 + j);
-                tempEj = String.valueOf(tempPais.getNumEjercitos());        // Número de ejércitos
-
-                // TODO: preguntar si hace falta overrride equals()
-                if (tempPais.getNombre().equals("Océano1")){
-                    System.out.print("           ");
-                } else if (tempPais.getNombre().equals("Océano2")){
-                    System.out.print("\033[0;31m     |     ");
-                } else {
-                    // + tempEj.getJugador().getColor()
-                    System.out.print(" " + tempEj);                     // Imprime el número de ejércitos
-                    for (k = 0; k < (10 - tempEj.length()); k++) {
-                        System.out.print(" ");                      // Espacios que falten
-                    }
-                }
-
-                if (i == 4 && j == 3){
-                    System.out.print("\033[0;31m|");      // Barra roja
-                } else {
-                    System.out.print("\033[0m|");      // Barra
-                }
-
-            }
-
-            // Separación horizontal
-            System.out.print("\n|");
-            for(j = 0; j < 11; j++){
-                System.out.print("===========");
-                if (i == 4 && j == 3){
-                    System.out.print("\033[0;31m");         // Hay una línea con un símbolo rojo
-                }
-                System.out.print("|\033[0m");
-            }
-            System.out.print("\n");
-        }
+        System.out.println(mapa);
     }
 
 
@@ -292,7 +197,7 @@ public class Menu {
         // Código necesario para asignar un país a un jugador
 
         Jugador jugador = jugadores.get(nombreJugador);
-        Pais pais = paises.get(nombrePais);
+        Pais pais = mapa.getPais(nombrePais);
 
         jugador.asignarPais(pais);
 
@@ -474,13 +379,13 @@ public class Menu {
             numFinal = jugador.getNumEjercitos();
         }
 
-        paises.get(nombrePais).setNumEjercitos(numFinal);
+        mapa.getPais(nombrePais).setNumEjercitos(numFinal);
 
         System.out.println("{");
         System.out.println("  pais: \"" + nombrePais + "\",");
         System.out.println("  jugador: \"" + jugador.getNombre() + "\",");
         System.out.println("  numeroEjercitosAsignados: " + numFinal + ",");
-        System.out.println("  numeroEjercitosTotales: " + paises.get(nombrePais).getNumEjercitos() + ",");
+        System.out.println("  numeroEjercitosTotales: " + mapa.getPais(nombrePais).getNumEjercitos() + ",");
 
         System.out.println("  paisesOcupadosContinente: [");
         // ?????????????????????

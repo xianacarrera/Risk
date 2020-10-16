@@ -6,27 +6,15 @@ class Pais {
     private String nombre;
     private String abreviatura;
     private boolean esFrontera;
-    private int fila;
-    private int col;
     private Continente continente;
     private Jugador jugador;
     private int numEjercitos;
     private int numVecesOcupado;
 
-    public Pais(String abreviatura, Continente continente, int fila, int col) {
+    public Pais(String abreviatura, Continente continente) {
         setAbreviatura(abreviatura);
         setNombre();
         this.continente = continente;
-        this.fila = fila;
-        this.col = col;
-    }
-
-    public void asignarFronteras(){
-        switch (nombre){
-            case "Africa":
-                HAs
-                break;
-        }
     }
 
     public Continente getContinente() {
@@ -51,14 +39,6 @@ class Pais {
 
     public boolean estaOcupado(){
         return numEjercitos > 0;
-    }
-
-    public int getFila() {
-        return this.fila;
-    }
-
-    public int getCol() {
-        return this.col;
     }
 
     public void setNombre() {
@@ -269,17 +249,6 @@ class Pais {
 
     }
      */
-
-
-    @Override
-    public String toString() {
-        switch (this.abreviatura){
-            case "Océano":
-                return "";
-            default:
-                return this.abreviatura;
-        }
-    }
 
     /*
     public String toString(){
