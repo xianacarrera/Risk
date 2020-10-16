@@ -3,6 +3,7 @@ package risk;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -143,23 +144,36 @@ public class Menu {
         System.out.println(mapa);
     }
 
+    public void obtenerFrontera(){
+
+    }
+
+    public void obtenerContinente(String abrevPais){
+        System.out.println("{\n" + " continente: \"" + mapa.preguntarContinentePais(abrevPais) + "\" }");
+    }
+
+    public void obtenerColor(String abrevPais){
+        System.out.println("{\n" + " color: \"" + mapa.preguntarColorPais(abrevPais) + "\" }");
+    }
+
+    public void obtenerPaises(String abrevCont){
+        System.out.println("{\n" + " color: \"" + mapa.preguntarListaPaises(abrevCont) + "\" }");
+    }
+
 
     public void crearJugador(String nombre, String color) {
         // Código necesario para crear a un jugador a partir de su nombre y color
         Jugador jugador = new Jugador(nombre, color);
         jugadores.put(nombre, jugador);
 
-        System.out.println("{");
-        System.out.println("  nombre: \"" + nombre + "\",");
-        System.out.println("  color: \"" + color + "\"");
-        System.out.println("}");
+        jugador.presentarJugador();
     }
 
     /**
      *
      * @param file
      */
-    public void crearJugador(String file) {
+    public void crearJugadores(String file) {
         // Código necesario para crear a los jugadores del RISK
 
         String linea = null;
@@ -191,11 +205,11 @@ public class Menu {
      * @param nombrePais
      * @param nombreJugador
      */
-    public void asignarPaises(String nombrePais, String nombreJugador){
+    public void asignarPaises(String abrevPais, String nombreJugador){
         // Código necesario para asignar un país a un jugador
 
         Jugador jugador = jugadores.get(nombreJugador);
-        Pais pais = mapa.getPais(nombrePais);
+        Pais pais = mapa.getPais(abrevPais);
 
         jugador.asignarPais(pais);
 

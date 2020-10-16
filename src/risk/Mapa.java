@@ -36,9 +36,9 @@ public class Mapa {
         }
     }
 
-    public void generarPais(String nombrePais, String nombreContinente, int fila, int columna){
+    public void generarPais(String abrevPais, String abrevContinente, int fila, int columna){
         Casilla casilla = casillas.get(fila - 1).get(columna - 1);
-        switch (nombrePais){
+        switch (abrevPais){
             case "Océano":
                 casilla.setTipoCasilla(0);
                 break;
@@ -51,9 +51,9 @@ public class Mapa {
             default:
                 casilla.setTipoCasilla(-1);
 
-                paises.put(nombrePais, new Pais(nombrePais, continentes.get(nombreContinente)));
-                continentes.get(nombreContinente).guardarPais(paises.get(nombrePais));
-                casilla.setPais(paises.get(nombrePais));
+                paises.put(abrevPais, new Pais(abrevPais, continentes.get(abrevContinente)));
+                continentes.get(abrevContinente).guardarPais(paises.get(abrevPais));
+                casilla.setPais(paises.get(abrevPais));
         }
     }
 
@@ -99,7 +99,7 @@ public class Mapa {
                         || (casillas.indexOf(fila) == 5 && fila.indexOf(casilla) == 3)){
                     mensaje += "\033[0;31m";      // Pone la barra roja
                 }
-                mensaje += "|";      // Barra entre casillas
+                mensaje += "|\033[0m";      // Barra entre casillas
             }
             mensaje += "\n|";
             for(Casilla casilla: fila){
@@ -148,12 +148,25 @@ public class Mapa {
         return mensaje;
     }
 
-    public Pais getPais(String nombrePais) {
-        if (paises.containsKey(nombrePais)) {
-            return paises.get(nombrePais);
+    public Pais getPais(String abrevPais) {
+        if (paises.containsKey(abrevPais)) {
+            return paises.get(abrevPais);
         }
 
         System.out.println("El país deseado no existe");
         return null;
     }
+
+    public String preguntarContinentePais(String abrevPais){
+        return paises.get(abrevPais).getContinente().getNombre();
+    }
+
+    public String preguntarColorPais(String abrevPais){
+        return paises.get(abrevPais).getContinente().getColor();
+    }
+
+    public ArrayList<Pais> preguntarListaPaises(String abrevCont){
+        return continentes.get(abrevCont).getListaPaises();
+    }
+
 }

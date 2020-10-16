@@ -81,7 +81,7 @@ class Continente {
     }
 
     // ?????
-    public ArrayList<Pais> getPaises() {
+    public ArrayList<Pais> getListaPaises() {
         return paises;
     }
 

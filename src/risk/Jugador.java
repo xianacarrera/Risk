@@ -29,9 +29,8 @@ class Jugador {
         return color;
     }
 
-    @Override
-    public String toString() {
-        return "jugador: " + nombre + ", color: " + color;
+    public void presentarJugador() {
+        System.out.println("{\n  nombre: \"" + nombre + "\",\n  color: \"" + color + "\"\n}");
     }
 
     /*

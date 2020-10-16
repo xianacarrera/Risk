@@ -16,7 +16,7 @@ public class Risk {
         menu.crearMapa();
         menu.verMapa();
 
-        menu.crearJugador("jugadores.csv");
+        menu.crearJugadores("jugadores.csv");
         menu.asignarPaises("asignaciones.csv");
     }
 
