@@ -60,7 +60,8 @@ public class Mapa {
     @Override
     public String toString() {
         Pais tempPais;              // Variable temporal para almacenar un país
-        String tempEj, mensaje;     // Variable temporal para almacenar un número de ejércitos y texto del mapa
+        Ejercito tempEj;            // Variable temporal para almacenar un número de ejércitos
+        String mensaje;             // Texto del mapa
 
         // Línea inicial |-----|----|----| ...
         mensaje = "|";
@@ -116,12 +117,16 @@ public class Mapa {
                     default:
                         tempPais = casilla.getPais();
                         // valueOf convierte int a String
-                        tempEj = String.valueOf(tempPais.getNumEjercitos());        // Número de ejércitos
+                        tempEj = tempPais.getEjercito();
 
-                        // + tempEj.getJugador().getColor()
-                        mensaje += " " + tempEj;                     // Imprime el número de ejércitos
-                        for (int i = 0; i < (10 - tempEj.length()); i++) {
-                            mensaje += " ";                      // Espacios que falten
+                        if (tempEj.getNumTropas() > 0) {
+                            mensaje += " " + tempEj.getColorEjercito() + tempEj.getNumTropas();
+                            // Imprime el número de ejércitos
+                            for (int i = 0; i < (10 - String.valueOf(tempEj.getNumTropas()).length()); i++) {
+                                mensaje += " ";                      // Espacios que falten
+                            }
+                        } else {
+                            mensaje += " -         ";
                         }
                 }
 
@@ -155,6 +160,75 @@ public class Mapa {
 
         System.out.println("El país deseado no existe");
         return null;
+    }
+
+    public Pais getPaisPorNombre(String nombrePais){
+        switch (nombrePais) {
+            case "Afganistán":
+                return getPais("Afgan");
+            case "Oriente Medio":
+                return getPais("OMedio");
+            case "Sudeste Asiático":
+                return getPais("SAsiático");
+            case "África del Norte":
+                return getPais("ANorte");
+            case "África Oriental":
+                return getPais("AOriental");
+            case "Madagascar":
+                return getPais("Madagascar");
+            case "Escandinavia":
+                return getPais("Escandina");
+            case "Europa del Norte":
+                return getPais("EurNorte");
+            case "Europa Occidental":
+                return getPais("EurOcc");
+            case "Europa del Sur":
+                return getPais("EurSur");
+            case "Gran Bretaña":
+                return getPais("GBretaña");
+            case "América Central":
+                return getPais("AmeCentra");
+            case "Groenlandia":
+                return getPais("Groenlan");
+            case "Territorios del Noroeste":
+                return getPais("TNoroeste");
+            case "Estados Unidos del Este":
+                return getPais("USAEste");
+            case "Estados Unidos del Oeste":
+                return getPais("USAOeste");
+            case "Nueva Guinea":
+                return getPais("NGuinea");
+            case "Australia Occidental":
+                return getPais("AusOccid");
+            case "AusOriental":
+                return getPais("AusOrient");
+            case "China":
+            case "India":
+            case "Irkutsk":
+            case "Japón":
+            case "Kamchatka":
+            case "Mongolia":
+            case "Siberia":
+            case "Urales":
+            case "Yakustsk":
+            case "Congo":
+            case "Egipto":
+            case "Sudáfrica":
+            case "Islandia":
+            case "Rusia":
+            case "Alaska":
+            case "Alberta":
+            case "Ontario":
+            case "Quebec":
+            case "Venezuela":
+            case "Perú":
+            case "Brasil":
+            case "Argentina":
+            case "Indonesia":
+                return getPais(nombrePais);
+            default:
+                return null;
+        }
     }
 
     public String preguntarContinentePais(String abrevPais){

@@ -1,5 +1,7 @@
 package risk;
 
+import java.lang.reflect.Array;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +14,7 @@ class Continente {
     private String color;
     private ArrayList<Pais> paises;
     private HashMap<String, Jugador> jugadores;
+    private Formateo formateo;
 
 
     Continente(String nombre) {
@@ -20,8 +23,10 @@ class Continente {
         asignarColorContinente();
         paises = new ArrayList<>();
         jugadores = new HashMap<>();
+        formateo = new Formateo();
     }
 
+    /*
     @Override
     public String toString() {
         String textoJugadores = "";     // Por qué poner aquí new String() ?? -> ver tema 1
@@ -47,6 +52,24 @@ class Continente {
                 "  numeroEjercitos: "   + numeroEjercitos   + ",\n"     +
                 "  rearmeContinente: "  + rearme            + "\n"      +
                 "}\n";
+
+        return mensaje;
+    }*/
+
+    @Override
+    public String toString() {
+        ArrayList<Integer> infoEjercitos = new ArrayList<>();
+
+        for (Jugador jugador : jugadores.values()){
+            infoEjercitos.add(jugador.getNumEjercitos());
+        }
+
+        String mensaje = "{\n" + formateo.formatoSimple("nombre", nombre)
+                + formateo.formatoSimple("abreviatura", abreviatura)
+                + formateo.formatoConjuntoIntegers("jugadores", infoEjercitos)
+                + formateo.formatoSimple("numeroEjercitos", numeroEjercitos)
+                + formateo.formatoSimpleFinal("rearmeContinente", rearme)
+                + "}\n";
 
         return mensaje;
     }
@@ -87,6 +110,26 @@ class Continente {
 
     public Pais getPaisAlf(int i) {
         return this.paises.get(i);
+    }
+
+    public ArrayList<String> getListaPaisesOcupados(){
+        ArrayList<String> paisesOcupados = new ArrayList<>();
+        for (Pais pais : paises){
+            if (pais != null && pais.getNumEjercitos() > 0){
+                paisesOcupados.add(pais.getNombre());
+            }
+        }
+        return paisesOcupados;
+    }
+
+    public ArrayList<Integer> getDatosOcupacion(){
+        ArrayList<Integer> datosOcupacion = new ArrayList<>();
+        for (Pais pais : paises){
+            if (pais != null && pais.getNumEjercitos() > 0){
+                datosOcupacion.add(pais.getNumEjercitos());
+            }
+        }
+        return datosOcupacion;
     }
 
 

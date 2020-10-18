@@ -1,6 +1,8 @@
 package risk;
 
 
+import java.text.Normalizer;
+
 class Pais {
 
     private String nombre;
@@ -10,35 +12,53 @@ class Pais {
     private Jugador jugador;
     private int numEjercitos;
     private int numVecesOcupado;
+    private Ejercito ejercito;
+    private Formateo formateo;
 
     public Pais(String abreviatura, Continente continente) {
         setAbreviatura(abreviatura);
         setNombre();
         this.continente = continente;
+
+        ejercito = new Ejercito(this);
+        formateo = new Formateo();
+    }
+
+    public void ocuparPais(Jugador jugador){
+        this.jugador = jugador;
+        ejercito.setJugador(jugador);
     }
 
     public Continente getContinente() {
         return this.continente;
     }
 
+    public Ejercito getEjercito(){
+        return ejercito;
+    }
+
     public int getNumEjercitos() {
-        return this.numEjercitos;
+        return ejercito.getNumTropas();
     }
 
     public void setNumEjercitos(int numTropas){
-        numEjercitos = numTropas;
+        ejercito.setNumTropas(numTropas);
     }
 
     public void añadirEjercitos(int numTropas){
-        numEjercitos += numTropas;
+        ejercito.añadirTropas(numTropas);
     }
 
     public void quitarEjercitos(int numTropas){
-        numEjercitos -= numTropas;
+        ejercito.quitarTropas(numTropas);
     }
 
-    public boolean estaOcupado(){
-        return numEjercitos > 0;
+    public Jugador getJugador(){
+        return jugador;
+    }
+
+    public boolean estaOcupadoPor(Jugador jugador){
+        return this.jugador.equals(jugador);
     }
 
     public void setNombre() {
@@ -169,15 +189,6 @@ class Pais {
             case "AusOrient":
                 this.nombre = "Australia Oriental";
                 break;
-            case "Océano":
-                this.nombre = "Océano";
-                break;
-            case "Océano1":
-                this.nombre = "Océano1";
-                break;
-            case "Océano2":
-                this.nombre = "Océano2";
-                break;
             default:
                 System.out.println("ERROR");
         }
@@ -229,10 +240,7 @@ class Pais {
                 || abreviatura.equals("Indonesia")
                 || abreviatura.equals("NGuinea")
                 || abreviatura.equals("AusOccid")
-                || abreviatura.equals("AusOrient")
-                || abreviatura.equals("Océano")
-                || abreviatura.equals("Océano1")
-                || abreviatura.equals("Océano2"))){
+                || abreviatura.equals("AusOrient"))){
             this.abreviatura = abreviatura;
         } else {
             System.out.println("No es un país");
@@ -252,20 +260,15 @@ class Pais {
 
     /*
     public String toString(){
-        String textoFrontera = "";
-
-
-        String mensaje =
-                "{\n" +
-                "  nombre: \""              + nombre                    + "\",\n" +
-                "  abreviatura: \""         + abreviatura               + "\",\n" +
-                "  continente:  \""         + continente.getNombre()    + "\",\n" +
-                "  frontera: ["             + textoFrontera             +
-                "\t\t\t],\n"                +
-                "  jugador: \""             + jugador.getNombre()       + "\",\n" +
-                "  numeroEjercitos: "       + numEjercitos              + ",\n"   +
-                "  numeroVecesOcupado: "    + numVecesOcupado           + "\n"    +
-                "}\n";
+        String mensaje = "{\n"
+                + formateo.formatoSimple("nombre", nombre)
+                + formateo.formatoSimple("abreviatura", abreviatura)
+                + formateo.formatoSimple("continente", continente.getNombre())
+                + formateo.formatoConjunto("frontera", )
+                + formateo.formatoSimple("jugador", jugador.getNombre())
+                + formateo.formatoSimple("numeroEjercitos", numEjercitos)
+                + formateo.formatoSimpleFinal("numeroVecesOcupado", numVecesOcupado)
+                + "}\n";
 
         return mensaje;
     }

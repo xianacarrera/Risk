@@ -21,6 +21,7 @@ public class Menu {
     private HashMap<String, Jugador> jugadores;
 
     private Mapa mapa;
+    private Formateo formateo;
 
 
     // TODO: preguntar por toString de AmeCentral
@@ -30,8 +31,9 @@ public class Menu {
      */
     public Menu() {
         // Inicialización de algunos atributos
+        jugadores = new HashMap<>();
+        formateo = new Formateo();
 
-        /*
         // Iniciar juego
         String orden= null;
         BufferedReader bufferLector= null;
@@ -39,6 +41,7 @@ public class Menu {
             File fichero=  new File("comandos.csv");
             FileReader lector= new FileReader(fichero);
             bufferLector= new BufferedReader(lector);
+
             while((orden= bufferLector.readLine())!=null) {
                 System.out.println("$> " + orden);
                 String[] partes=orden.split(" ");
@@ -72,21 +75,21 @@ public class Menu {
                                 // necesarios para realizar esa invocación
                                 crearMapa();
                             } else {
-                                System.out.println("\nComando incorrecto.");
+                                resultadoError(101);
                             }
-                        } if(partes.length==3) {
+                        } else if(partes.length==3) {
                             if(partes[1].equals("jugadores")) {
                                 crearJugador(new File(partes[2]));
                             } else {
                                 crearJugador(partes[1], partes[2]);
                             }
                         } else {
-                            System.out.println("\nComando incorrecto.");
+                            resultadoError(101);
                         }
                         break;
                     case "asignar":
                         if(partes.length!=3) {
-                            System.out.println("\nComando incorrecto.");
+                            resultadoError(101);
                         } else if(partes[1].equals("paises")) {
                             // asignarPaises es un método de la clase Menu que recibe como entrada el fichero
                             // en el que se encuentra la asignación de países a jugadores. Dentro de este
@@ -98,15 +101,12 @@ public class Menu {
                         }
                         break;
                     default:
-                        System.out.println("\nComando incorrecto.");
+                        resultadoError(101);
                 }
             }
         } catch(Exception excepcion) {
             excepcion.printStackTrace();
         }
-        */
-
-        jugadores = new HashMap<>();
     }
 
 
@@ -134,6 +134,8 @@ public class Menu {
 
             bufferLector.close();
 
+            verMapa();
+
         } catch(Exception ex){
             ex.printStackTrace();
         }
@@ -144,104 +146,33 @@ public class Menu {
         System.out.println(mapa);
     }
 
-    public void obtenerFrontera(){
-
-    }
-
-    public void obtenerContinente(String abrevPais){
-        System.out.println("{\n" + " continente: \"" + mapa.preguntarContinentePais(abrevPais) + "\" }");
-    }
-
-    public void obtenerColor(String abrevPais){
-        System.out.println("{\n" + " color: \"" + mapa.preguntarColorPais(abrevPais) + "\" }");
-    }
-
-    public void obtenerPaises(String abrevCont){
-        System.out.println("{\n" + " color: \"" + mapa.preguntarListaPaises(abrevCont) + "\" }");
-    }
-
-
     public void crearJugador(String nombre, String color) {
         // Código necesario para crear a un jugador a partir de su nombre y color
         Jugador jugador = new Jugador(nombre, color);
         jugadores.put(nombre, jugador);
 
-        jugador.presentarJugador();
+        System.out.println("{\n" + formateo.formatoSimple("nombre", nombre) +
+                formateo.formatoSimpleFinal("color", color) + "}");
     }
 
     /**
      *
      * @param file
      */
-    public void crearJugadores(String file) {
+    public void crearJugador(File file) {
         // Código necesario para crear a los jugadores del RISK
 
         String linea = null;
         BufferedReader bufferLector = null;
 
         try{
-            File fichero = new File(file);
-            FileReader lector = new FileReader(fichero);
+            FileReader lector = new FileReader(file);
             bufferLector = new BufferedReader(lector);
 
             while ((linea = bufferLector.readLine()) != null){
                 String[] infoJug = linea.split(";");
                 if (infoJug.length == 2) {
                     crearJugador(infoJug[0], infoJug[1]);
-                } else {
-                    System.out.println("NO");
-                }
-            }
-
-            bufferLector.close();
-
-        } catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     *
-     * @param nombrePais
-     * @param nombreJugador
-     */
-    public void asignarPaises(String abrevPais, String nombreJugador){
-        // Código necesario para asignar un país a un jugador
-
-        Jugador jugador = jugadores.get(nombreJugador);
-        Pais pais = mapa.getPais(abrevPais);
-
-        jugador.asignarPais(pais);
-
-        // RESULTADO OK
-        System.out.println("{");
-        System.out.println("  nombre: \"" + jugador.getNombre() + "\",");
-        System.out.println("  pais: \"" + pais.getNombre() + "\",");
-        System.out.println("  continente: \"" + pais.getContinente().getNombre() + "\",");
-        //TODO: Frontera
-        System.out.println("}");
-    }
-
-    /**
-     *
-     * @param file
-     */
-    public void asignarPaises(String file){
-        // Código necesario para asignar países
-
-        String linea = null;
-        BufferedReader bufferLector = null;
-
-        try{
-            File fichero = new File(file);
-            FileReader lector = new FileReader(fichero);
-            bufferLector = new BufferedReader(lector);
-
-            while ((linea = bufferLector.readLine()) != null){
-                String[] info = linea.split(";");
-                if (info.length == 2) {
-                    // La llamada a asignar no necesita objeto porque Java implícitamente asume que el objeto es this
-                    asignarPaises(info[1], info[0]);
                 } else {
                     System.out.println("NO");
                 }
@@ -303,12 +234,8 @@ public class Menu {
 
 
 
-        System.out.println("{");
-        System.out.println("  nombre: \"" + nombreJugador + "\",");
-        System.out.println("  mision: \"");
-        explicarMision(idMision);
-        System.out.print("\"");
-        System.out.println("}");
+        System.out.println("{" + formateo.formatoSimple("nombre", nombreJugador)
+                + formateo.formatoSimpleFinal("mision", explicarMision(idMision)) + "}");
     }
 
     public String explicarMision(String idMision){
@@ -384,25 +311,104 @@ public class Menu {
         }
     }
 
-    public void repartirEjercitos(Jugador jugador, String numero, String nombrePais){
+
+    /**
+     *
+     * @param nombrePais
+     * @param nombreJugador
+     */
+    public void asignarPaises(String abrevPais, String nombreJugador){
+        // Código necesario para asignar un país a un jugador
+
+        Jugador jugador = jugadores.get(nombreJugador);
+        Pais pais = mapa.getPais(abrevPais);
+
+        jugador.asignarPais(pais);
+
+        System.out.println("{\n" + formateo.formatoSimple("nombre", jugador.getNombre()) +
+                formateo.formatoSimple("pais", pais.getNombre()) +
+                formateo.formatoSimple("continente", pais.getContinente().getNombre()) + "}");
+        // TODO: fronteras
+
+    }
+
+    /**
+     *
+     * @param file
+     */
+    public void asignarPaises(File file){
+        // Código necesario para asignar países
+
+        String linea = null;
+        BufferedReader bufferLector = null;
+
+        try{
+            FileReader lector = new FileReader(file);
+            bufferLector = new BufferedReader(lector);
+
+            while ((linea = bufferLector.readLine()) != null){
+                String[] info = linea.split(";");
+                if (info.length == 2) {
+                    // La llamada a asignar no necesita objeto porque Java implícitamente asume que el objeto es this
+                    asignarPaises(info[1], info[0]);
+                } else {
+                    System.out.println("NO");
+                }
+            }
+
+            bufferLector.close();
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    public void repartirEjercitos(Jugador jugador, String numero, String nombrePais){ Pais pais = mapa.getPaisPorNombre(nombrePais);
+
+        if (!pais.estaOcupadoPor(jugador)){
+            resultadoError(110);
+            return;
+        }
+
         int numFinal = Integer.parseInt(numero);
 
         if (numFinal > jugador.getNumEjercitos()){
             numFinal = jugador.getNumEjercitos();
         }
 
-        mapa.getPais(nombrePais).setNumEjercitos(numFinal);
+        pais.setNumEjercitos(numFinal);
 
-        System.out.println("{");
-        System.out.println("  pais: \"" + nombrePais + "\",");
-        System.out.println("  jugador: \"" + jugador.getNombre() + "\",");
-        System.out.println("  numeroEjercitosAsignados: " + numFinal + ",");
-        System.out.println("  numeroEjercitosTotales: " + mapa.getPais(nombrePais).getNumEjercitos() + ",");
 
-        System.out.println("  paisesOcupadosContinente: [");
-        // ?????????????????????
+        System.out.println("{\n" + formateo.formatoSimple("pais", nombrePais)
+                + formateo.formatoSimple("jugador", jugador.getNombre())
+                + formateo.formatoSimple("numeroEjercitosAsignados", numFinal)
+                + formateo.formatoSimple("numeroEjercitosTotales", pais.getNumEjercitos())
+                + formateo.formatoDosConjuntosFinal("paisesOcupadosContinente",
+                        pais.getContinente().getListaPaisesOcupados(), pais.getContinente().getDatosOcupacion())
+                + "}");
+    }
+
+
+    public void obtenerFrontera(){
 
     }
+
+    public void obtenerContinente(String abrevPais){
+        System.out.println("{\n" + " continente: \"" + mapa.preguntarContinentePais(abrevPais) + "\" }");
+    }
+
+    public void obtenerColor(String abrevPais){
+        System.out.println("{\n" + " color: \"" + mapa.preguntarColorPais(abrevPais) + "\" }");
+    }
+
+    public void obtenerPaises(String abrevCont){
+        System.out.println("{\n" + " color: \"" + mapa.preguntarListaPaises(abrevCont) + "\" }");
+    }
+
+
+
+
 
     public void resultadoError(int codigo){
         switch (codigo){

@@ -1,5 +1,6 @@
 package risk;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -13,11 +14,7 @@ public class Risk {
         // Para poder lanzar los métodos hace falta una instancia de la clase Main, en este caso, risk
         Menu menu = new Menu();
 
-        menu.crearMapa();
-        menu.verMapa();
-
-        menu.crearJugadores("jugadores.csv");
-        menu.asignarPaises("asignaciones.csv");
+        menu.asignarPaises(new File("asignaciones.csv"));
     }
 
     public void crearDados() {
