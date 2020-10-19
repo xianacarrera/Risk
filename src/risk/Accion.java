@@ -1,5 +1,7 @@
 package risk;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,7 +13,10 @@ public class Accion {
     public Accion(){
         dados = new Dados();
         formateo = new Formateo();
+
+        jugar();
     }
+
 
     public void atacar(Pais atacante, Pais defensor){
         // if atacante.tieneFronteraCon(defensor)

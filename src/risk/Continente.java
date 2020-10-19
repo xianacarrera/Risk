@@ -13,6 +13,7 @@ class Continente {
     private int rearme;
     private String color;
     private ArrayList<Pais> paises;
+    private ArrayList<Pais> fronteras;
     private HashMap<String, Jugador> jugadores;
     private Formateo formateo;
 

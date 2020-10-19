@@ -7,23 +7,23 @@ public class Formateo {
     public Formateo(){}
 
     public String formatoSimple(String atributo, String valor){
-        return "  " + atributo + ": \"" + valor + "\",\n";
+        return " " + atributo + ": \"" + valor + "\",\n";
     }
 
     public String formatoSimple(String atributo, int valor){
-        return "  " + atributo + ": " + valor + ",\n";
+        return " " + atributo + ": " + valor + ",\n";
     }
 
     public String formatoSimpleFinal(String atributo, String valor){
-        return "  " + atributo + ": \"" + valor + "\"\n";
+        return " " + atributo + ": \"" + valor + "\"\n";
     }
 
     public String formatoSimpleFinal(String atributo, int valor){
-        return "  " + atributo + ": " + valor + ",\n";
+        return " " + atributo + ": " + valor + ",\n";
     }
 
     public String formatoConjuntoStrings(String atributo, ArrayList<String> valores){
-        String resultado = "  " + atributo + ": [";
+        String resultado = " " + atributo + ": [";
         for (int i = 0; i < valores.size(); i++){
             if (i == 0){
                 resultado += " { \"" + valores.get(i) + "\" },\n";
@@ -39,7 +39,7 @@ public class Formateo {
     }
 
     public String formatoConjuntoIntegers(String atributo, ArrayList<Integer> valores){
-        String resultado = "  " + atributo + ": [";
+        String resultado = " " + atributo + ": [";
         for (int i = 0; i < valores.size(); i++){
             if (i == 0){
                 resultado += " { " + valores.get(i) + " },\n";
@@ -55,7 +55,7 @@ public class Formateo {
     }
 
     public String formatoConjuntoStringsFinal(String atributo, ArrayList<String> valores){
-        String resultado = "  " + atributo + ": [";
+        String resultado = " " + atributo + ": [";
         for (int i = 0; i < valores.size(); i++){
             if (i == 0){
                 resultado += " { \"" + valores.get(i) + " },\n";
@@ -91,7 +91,7 @@ public class Formateo {
     }
 
     public String formatoConjuntoCaracter(String atributo, char tipoConjuntoInicio, ArrayList<Integer> valores){
-        String resultado = "  " + atributo + ": " + tipoConjuntoInicio + " ";
+        String resultado = " " + atributo + ": " + tipoConjuntoInicio + " ";
         for (int i = 0; i < valores.size() - 1; i++) {
             resultado += valores.get(i) + ", ";
         }

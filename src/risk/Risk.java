@@ -3,6 +3,10 @@ package risk;
 import java.io.File;
 import java.util.ArrayList;
 
+// TODO: usar override en asignarPaises, asignarMisiones?
+// TODO: orden repartir, repartirEjercitos
+// TODO: Casilla necesita fila y columna?
+
 
 public class Risk {
 
@@ -13,8 +17,6 @@ public class Risk {
     public static void main(String[] args) {
         // Para poder lanzar los métodos hace falta una instancia de la clase Main, en este caso, risk
         Menu menu = new Menu();
-
-        menu.asignarPaises(new File("asignaciones.csv"));
     }
 
     public void crearDados() {

@@ -3,7 +3,6 @@ package risk;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,9 +21,12 @@ public class Menu {
 
     private Mapa mapa;
     private Formateo formateo;
+    private Accion accion;
+
+    private static int flagOrdenInicial;
+    private static int flagTurno;
 
 
-    // TODO: preguntar por toString de AmeCentral
 
     /**
      *
@@ -68,36 +70,137 @@ public class Menu {
                 //    ver pais <nombre_pais>
                 switch(comando) {
                     case "crear":
-                        if(partes.length==2) {
-                            if(partes[1].equals("mapa")) {
+                        if (partes.length == 2) {
+                            if (partes[1].equals("mapa")) {
                                 // crearMapa es un método de la clase Menú desde el que se puede invocar
                                 // a otros métodos de las clases que contienen los atributos y los métodos
                                 // necesarios para realizar esa invocación
-                                crearMapa();
+                                if (flagOrdenInicial == 0) {
+                                    crearMapa();
+                                    flagOrdenInicial++;
+                                } else {
+                                    resultadoError(99);
+                                }
                             } else {
                                 resultadoError(101);
                             }
-                        } else if(partes.length==3) {
-                            if(partes[1].equals("jugadores")) {
-                                crearJugador(new File(partes[2]));
+                        } else if (partes.length == 3) {
+                            if (flagOrdenInicial == 1) {
+                                if (partes[1].equals("jugadores")) {
+                                    crearJugador(new File(partes[2]));
+                                } else {
+                                    crearJugador(partes[1], partes[2]);
+                                }
                             } else {
-                                crearJugador(partes[1], partes[2]);
+                                resultadoError(99);
                             }
                         } else {
                             resultadoError(101);
                         }
                         break;
                     case "asignar":
-                        if(partes.length!=3) {
+                        if (partes.length != 3) {
                             resultadoError(101);
-                        } else if(partes[1].equals("paises")) {
+                        } else if (partes[1].equals("paises")) {
                             // asignarPaises es un método de la clase Menu que recibe como entrada el fichero
                             // en el que se encuentra la asignación de países a jugadores. Dentro de este
                             // método se invocará a otros métodos de las clases que contienen los atributos
                             // y los métodos necesarios para realizar esa invocación
-                            asignarPaises(new File(partes[2]));
+                            if (flagOrdenInicial == 2 || flagOrdenInicial == 3) {
+                                flagOrdenInicial = 3;
+                                asignarPaises(new File(partes[2]));
+                            } else {
+                                resultadoError(99);
+                            }
+                        } else if (partes[1].equals("misiones")) {
+                            if (flagOrdenInicial == 1 || flagOrdenInicial == 2) {
+                                flagOrdenInicial = 2;
+                                asignarMisiones(new File(partes[2]));
+                            } else {
+                                resultadoError(99);
+                            }
+                        } else if (partes[1].equals("carta")){
+                            asignarCartas();
+                            break;
+                        } else if (partes[2] == "M1" || partes[2] == "M2" || partes[2] == "M31"
+                                || partes[2] == "M32" || partes[2] == "M33" || partes[2] == "M34"
+                                || partes[2] == "M41" || partes[2] == "M42" || partes[2] == "M43"
+                                || partes[2] == "M44" || partes[2] == "M45" || partes[2] == "M46") {
+                            if (flagOrdenInicial == 1 || flagOrdenInicial == 2) {
+                                flagOrdenInicial = 2;
+                                asignarMisiones(partes[1], partes[2]);
+                            } else {
+                                resultadoError(99);
+                            }
                         } else {
-                            asignarPaises(partes[1], partes[2]);
+                            if (flagOrdenInicial == 2 || flagOrdenInicial == 3) {
+                                flagOrdenInicial = 3;
+                                asignarPaises(partes[1], partes[2]);
+                            } else {
+                                resultadoError(99);
+                            }
+                        }
+                        break;
+                    case "repartir":
+                        if (partes.length == 2 && partes[1].equals("ejercitos")) {
+                            if (flagOrdenInicial == 3 || flagOrdenInicial == 4) {     // ??????
+                                flagOrdenInicial = 4;
+                                // TODO: repartirEjercitos() ---> PREGUNTAR ORDEN
+                            }
+                        } else if (partes.length == 4){
+                            flagOrdenInicial = 4;
+                            // TODO: repartirEjercitos();
+                        } else {
+                            resultadoError(101);
+                        }
+                        break;
+                    case "cambiar":
+                    case "acabar":
+                        if (partes.length == 2 && partes[1].equals("turno")){
+                            // flagTurno?
+                            acabarTurno();
+                        } else {
+                            resultadoError(101);
+                        }
+                        break;
+                    case "jugador":
+                        // flagTurno?
+                        describirJugador();
+                        break;
+                    case "describir":
+                        if (partes.length != 3){
+                            resultadoError(101);
+                        } else if (partes[1].equals("jugador")){
+                            describirJugador(partes[2]);
+                        } else if (partes[1].equals("pais")){
+                            describirPais(partes[2]);
+                        } else if (partes[1].equals("continente")){
+                            describirContinente(partes[2]);
+                        } else {
+                            resultadoError(101);
+                        }
+                        break;
+                    case "ver":
+                        if (partes.length == 2 && partes[1].equals("mapa")){
+                            verMapa();
+                        } else {
+                            resultadoError(101);
+                        }
+                        break;
+                    case "atacar":
+                        if (partes.length == 3){
+                            atacar(partes[1], partes[2]);
+                        } else if (partes.length == 5){
+                            atacar(partes[1], partes[2], partes[3], partes[4]);
+                        } else {
+                            resultadoError(101);
+                        }
+                        break;
+                    case "rearmar":
+                        if (partes.length != 4){
+                            resultadoError(101);
+                        } else {
+                            rearmar(partes[1], partes[2], partes[3]);
                         }
                         break;
                     default:
@@ -107,6 +210,8 @@ public class Menu {
         } catch(Exception excepcion) {
             excepcion.printStackTrace();
         }
+
+        Accion accion = new Accion();
     }
 
 
@@ -285,14 +390,13 @@ public class Menu {
         return mision;
     }
 
-    public void asignarMisiones(String file){
+    public void asignarMisiones(File file){
 
         String linea = null;
         BufferedReader bufferLector = null;
 
         try{
-            File fichero = new File(file);
-            FileReader lector = new FileReader(fichero);
+            FileReader lector = new FileReader(file);
             bufferLector = new BufferedReader(lector);
 
             while ((linea = bufferLector.readLine()) != null){
