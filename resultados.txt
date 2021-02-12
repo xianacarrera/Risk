@@ -1,0 +1,342 @@
+{
+ nombre: "Gondorff",
+ color: "VERDE"
+}
+
+{
+ nombre: "Hooker",
+ color: "AZUL"
+}
+
+{
+ nombre: "Lonnegan",
+ color: "ROJO"
+}
+
+{
+ nombre: "Gondorff",
+ mision: "Conquistar 24 países de la preferencia del jugador"
+}
+
+{
+ nombre: "Hooker",
+ mision: "Conquistar Asia y África"
+}
+
+{
+ nombre: "Lonnegan",
+ mision: "Destruir el ejército AZUL"
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Alaska",
+ continente: "América del Norte",
+ frontera: [ "Alberta", "Kamchatka", "Territorios del Noroeste" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Territorios del Noroeste",
+ continente: "América del Norte",
+ frontera: [ "Ontario", "Alaska", "Groenlandia" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Groenlandia",
+ continente: "América del Norte",
+ frontera: [ "Quebec", "Territorios del Noroeste", "Islandia" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Islandia",
+ continente: "Europa",
+ frontera: [ "Groenlandia", "Escandinavia" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Escandinavia",
+ continente: "Europa",
+ frontera: [ "Gran Bretaña", "Islandia", "Siberia" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Siberia",
+ continente: "Asia",
+ frontera: [ "Europa del Norte", "Escandinavia", "Yakustsk" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Yakustsk",
+ continente: "Asia",
+ frontera: [ "Rusia", "Siberia", "Kamchatka" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Kamchatka",
+ continente: "Asia",
+ frontera: [ "Irkutsk", "Yakustsk", "Alaska" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Alberta",
+ continente: "América del Norte",
+ frontera: [ "Alaska", "Estados Unidos del Oeste", "Ontario" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Ontario",
+ continente: "América del Norte",
+ frontera: [ "Territorios del Noroeste", "Estados Unidos del Este", "Alberta", "Quebec" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Quebec",
+ continente: "América del Norte",
+ frontera: [ "Groenlandia", "Ontario" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Gran Bretaña",
+ continente: "Europa",
+ frontera: [ "Escandinavia", "Europa Occidental", "Europa del Norte" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Europa del Norte",
+ continente: "Europa",
+ frontera: [ "Siberia", "Europa del Sur", "Gran Bretaña", "Rusia" ]
+}
+
+{
+ nombre: "Gondorff",
+ pais: "Rusia",
+ continente: "Europa",
+ frontera: [ "Yakustsk", "Urales", "Europa del Norte", "Irkutsk" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Irkutsk",
+ continente: "Asia",
+ frontera: [ "Kamchatka", "Mongolia", "Rusia" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Estados Unidos del Oeste",
+ continente: "América del Norte",
+ frontera: [ "Alberta", "Estados Unidos del Este" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Estados Unidos del Este",
+ continente: "América del Norte",
+ frontera: [ "Ontario", "América Central", "Estados Unidos del Oeste" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Europa Occidental",
+ continente: "Europa",
+ frontera: [ "Gran Bretaña", "África del Norte", "Europa del Sur" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Europa del Sur",
+ continente: "Europa",
+ frontera: [ "Europa del Norte", "Egipto", "Europa Occidental", "Urales" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Urales",
+ continente: "Asia",
+ frontera: [ "Rusia", "Afganistán", "Europa del Sur", "Mongolia" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Mongolia",
+ continente: "Asia",
+ frontera: [ "Irkutsk", "China", "Urales", "Japón" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Japón",
+ continente: "Asia",
+ frontera: [ "Mongolia" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "América Central",
+ continente: "América del Norte",
+ frontera: [ "Estados Unidos del Este", "Venezuela" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Afganistán",
+ continente: "Asia",
+ frontera: [ "Urales", "Oriente Medio", "China" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "China",
+ continente: "Asia",
+ frontera: [ "Mongolia", "India", "Afganistán" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Venezuela",
+ continente: "América del Sur",
+ frontera: [ "América Central", "Perú" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "África del Norte",
+ continente: "África",
+ frontera: [ "Europa Occidental", "Congo", "Brasil", "Egipto" ]
+}
+
+{
+ nombre: "Hooker",
+ pais: "Egipto",
+ continente: "África",
+ frontera: [ "Europa del Sur", "África Oriental", "África del Norte", "Oriente Medio" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Oriente Medio",
+ continente: "Asia",
+ frontera: [ "Afganistán", "Egipto", "India" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "India",
+ continente: "Asia",
+ frontera: [ "China", "Oriente Medio", "Sureste Asiático" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Sureste Asiático",
+ continente: "Asia",
+ frontera: [ "Indonesia", "India" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Perú",
+ continente: "América del Sur",
+ frontera: [ "Venezuela", "Argentina", "Brasil" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Brasil",
+ continente: "América del Sur",
+ frontera: [ "Perú", "África del Norte" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Congo",
+ continente: "África",
+ frontera: [ "África del Norte", "África Oriental" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "África Oriental",
+ continente: "África",
+ frontera: [ "Egipto", "Sudáfrica", "Congo" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Argentina",
+ continente: "América del Sur",
+ frontera: [ "Perú" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Sudáfrica",
+ continente: "África",
+ frontera: [ "África Oriental", "Madagascar" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Madagascar",
+ continente: "África",
+ frontera: [ "Sudáfrica" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Indonesia",
+ continente: "Oceanía",
+ frontera: [ "Sureste Asiático", "Australia Occidental", "Nueva Guinea" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Nueva Guinea",
+ continente: "Oceanía",
+ frontera: [ "Australia Oriental", "Indonesia" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Australia Occidental",
+ continente: "Oceanía",
+ frontera: [ "Indonesia", "Australia Oriental" ]
+}
+
+{
+ nombre: "Lonnegan",
+ pais: "Australia Oriental",
+ continente: "Oceanía",
+ frontera: [ "Nueva Guinea", "Australia Occidental" ]
+}
+
+|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|
+| Alaska    | TNoroeste | Groenlan  |-----------| Islandia  | Escandina | Siberia   | Yakustsk  | Kamchatka |-----------|-----------|
+| 10        | 10        | 10        |           | 2         | 1         | 1         | 1         | 1         |           |           |
+|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|
+| Alberta   | Ontario   | Quebec    |           |           | GBretaña  | EurNorte  | Rusia     | Irkutsk   |           |           |
+| 10        | 10        | 10        |           |           | 1         | 1         | 2         | 10        |           |           |
+|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|
+| USAOeste  | USAEste   |           |           |           | EurOcc    | EurSur    | Urales    | Mongolia  | Japón     |           |
+| 1         | 1         |           |           |           | 1         | 1         | 10        | 10        | 10        |           |
+|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|
+|           | AmeCentra |           |           |           |     |     |     |     | Afgan     | China     |           |           |
+|           | 1         |           |           |           |     |     |     |     | 10        | 10        |           |           |
+|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|
+|           | Venezuela |           |           |-----------| ANorte    | Egipto    | OMedio    | India     | SAsiático |           |
+|           | 1         |           |           |           | 2         | 2         | 3         | 3         | 3         |           |
+|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|===========|
+|           | Perú      | Brasil    |-----------|           | Congo     | AOriental |           |           |     |     |           |
+|           | 3         | 3         |           |           | 3         | 3         |           |           |     

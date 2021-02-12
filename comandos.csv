@@ -1,0 +1,133 @@
+crear mapa
+crear jugadores jugadores.csv
+asignar misiones misiones.csv
+asignar mision Hooker M32
+asignar mision Lonnegan M42
+asignar paises paises.csv
+repartir ejercitos
+jugador
+repartir ejercitos 10 Alaska
+asignar carta Antiaerea&Islandia
+atacar GBretaña 2x3x6 EurOcc 5
+atacar EurNorte 6x6x6 Rusia 1
+asignar carta Antiaerea&Japón
+asignar carta Antiaerea&Islandia
+jugador
+acabar turno
+ver mapa
+jugador
+repartir ejercitos 20 USAOeste
+cambiar cartas todas
+atacar USAEste 5 Ontario 2
+asignar carta DeCaballo&AmeCentra
+rearmar 1 Venezuela Ontario
+acabar turno
+ver mapa
+jugador
+repartir ejercitos 50 AOriental
+atacar AOriental 6 Egipto 1
+atacar Congo 4 ANorte 4
+rearmar Sudáfrica 2 AOriental
+rearmar Sudáfrica 1 AOriental
+asignar carta Granadero&OMedio
+describir continente África
+acabar turno
+ver mapa
+jugador
+repartir ejercitos 2 Rusia
+repartir ejercitos 1 EurNorte
+atacar EurNorte 5x5x5 EurSur 1
+repartir ejercitos 80 EurNorte
+atacar EurNorte 5x5x5 EurSur 1
+rearmar EurNorte 1 EurSur  
+asignar carta DeCampanha&China
+acabar turno
+cambiar carta Granadero&China
+cambiar cartas todas
+repartir ejercitos 80 Irkutsk
+repartir ejercitos 6 Mongolia
+atacar Irkutsk 1 Kamchatka 6
+rearmar Mongolia 3 Irkutsk
+atacar Irkutsk 6x6x6 Kamchatka 1
+crear jugadores jugadores.csv
+rearmar Mongolia 3 Irkutsk
+asignar carta DeCaballo&Mongolia
+describir jugador Loonegan
+describir jugador PabloDVI
+describir pais Japón
+describir pais Espana
+describir continente África
+descrbir contneente África
+rearmar Mongolia 3 Irkutsk
+acabar turno
+ver mapa
+cambiar carta Granadero&China Granadero&OMedio
+repartir ejercitos 56 Perú
+atacar Perú 1x6x4 Venezuela 4
+atacar Perú 2x6x4 Venezuela 1x2
+rearmar Argentin 1 Venezuela
+rearmar Perú 5 Venezuela
+asignar carta DeCaballo&Venezuela
+acabar turno
+describir jugador Gondorff
+describir jugador Hooker
+describir jugador Lonnegan
+ver mapa
+repartir ejercitos 1 Islandia
+repartir ejercitos 3 EurOcc
+repartir ejercitos 3 EurNorte
+repartir ejercitos 10 Escandina
+atacar Rusia 4x5x6 Urales 1x1
+atacar Rusia 4x5x6 Urales 6x4
+atacar Rusia 4x5x6 Urales 1x1
+rearmar Urales 2 Rusia
+asignar carta Antiaerea&Japón
+asignar carta Hola&Japón
+asignar carta Antiaerea&Escandina
+acabar turno
+ver mapa
+jugador
+repartir ejercitos 55 Kamchatka
+atacar Kamchatka 1x1x6 Yakustsk 1
+rearmar Yakustsk 1 Yakustsk
+rearmar Kamchatka 1 Yakustsk
+asignar carta DeCamello&Afgan
+acabar turno
+ver mapa
+jugador
+repartir ejercitos 15 Congo
+atacar Congo 6x6x6 ANorte 1
+rearmar Congo 6 ANorte
+asignar carta Antiaerea&Congo
+ver mapa
+acabar turno
+jugador
+repartir ejercitos 1000 EurSur
+acabar turno
+jugador
+cambiar cartas DeCaballo&Mongolia DeCaballo&AmeCentra DeCamello&Afgan
+repartir ejercitos 1000 Yakustsk
+acabar turno
+repartir ejercitos 1000 Egipto
+atacar Venezuela 6x6x6 AmeCentra 1
+asignar carta Granadero&USAEste
+acabar turno
+repartir ejercitos 1000 Rusia
+acabar turno
+repartir ejercitos 1000 Afgan
+acabar turno
+repartir ejercitos 1000 OMedio
+ver mapa
+atacar OMedio 6x6x6 Afgan 1x1
+atacar OMedio 6x6x6 Afgan 1x1
+atacar OMedio 6x6x6 Afgan 1x1
+atacar OMedio 6x6x6 Afgan 1
+ver mapa
+asignar carta Fusilero&GBretaña
+acabar turno
+repartir ejercitos 1000 EurOcc
+acabar turno
+repartir ejercitos 1000 Ontario
+acabar turno
+jugador
+cambiar cartas todas

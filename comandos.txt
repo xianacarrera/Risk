@@ -1,0 +1,42 @@
+crear mapa
+crear jugadores jugadores.csv
+asignar misiones misiones.csv
+asignar paises paises.csv
+repartir ejercitos
+repartir ejercitos 4 Alberta
+atacar Alberta 6x5x4 USAOeste 5
+asignar carta Fusilero&Alaska
+acabar turno
+repartir ejercitos 4 Japón
+acabar turno
+repartir ejercitos 6 AusOrient
+acabar turno
+repartir ejercitos 5 USAOeste
+atacar USAOeste 6x6x6 USAEste 3
+asignar carta Granadero&Alaska
+acabar turno
+repartir ejercitos 4 Japón
+acabar turno
+repartir ejercitos 6 AusOrient
+acabar turno
+jugador
+repartir ejercitos 5 USAEste
+atacar USAEste 6x2x1 AmeCentra 2
+ver mapa
+asignar carta DeCampanha&USAEste
+acabar turno
+repartir ejercitos 3 Japón
+acabar turno
+repartir ejercitos 6 AusOrient
+acabar turno
+jugador
+repartir ejercitos 10 AmeCentra
+ver mapa
+atacar AmeCentra 5x3x1 Venezuela 4
+asignar carta DeCaballo&USAEste
+acabar turno
+repartir ejercitos 3 Japón
+acabar turno
+repartir ejercitos 6 AusOrient
+acabar turno
+cambiar cartas todas
