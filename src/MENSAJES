@@ -1,0 +1,58 @@
+He creado este archivo para que podamos ir comentando cambios del códigs, avisos, notas, etc. que queramos
+comunicar la una a la otra.
+Si quieres, cuando hayas leído esto, bórralo y úsalo tú para anotar lo que quieras. Cuando vuelva a abrir el proyecto
+será lo primero que mire.
+
+1. La clase Error está guay, pero he cambiado la forma de llamarla en el menú. Tal y como estaba el código, cada vez
+que se quería lanzar un error, se creaba un nuevo objeto de la clase. En realidad, es un gasto de memoria innecesario.
+Lo que hice fue crear un objeto global como atributo y llamar a resultadoError con él desde las funciones que lo
+necesiten.
+
+2. En la parte de selección de comandos en el menú, hay partes que requieren de estructuras if-else, pero otras que se
+pueden hacer con switch. He intentado poner switches siempre que he podido cuando hay 3 o más opciones (eso incluyó
+modificar la parte del código que nos pasaron). Coméntame si estás de acuerdo/en desacuerdo pls
+
+3. En Formateo, voy a eliminar los métodos con "final". Había hecho la distinción para las líneas que llevan coma al
+final y las que no, pero me parece un poco chorrada. Diría que es mejor poner esa coma a mano y ya.
+
+4. Hecho sistema de turnos.
+
+5. Hecho comando 19
+
+6. Hecho rearmar.
+
+7. Revisado sistema de errores en varias funciones.
+
+8. Completado comando 18.
+
+9. Hechos comandos 14, 15, 16, salvo rearmeContinente y Cartas.
+
+10. Arreglado y completado comando 8
+
+11. Hechos los "obtener" del comando 1
+
+12. Avanzado en sistema de comandos. Pendientes ciertas comprobaciones (marcar que todos los no iniciales no se pueden
+ejecutar durante el orden inicial)
+
+13. Mejorado comando 4. A la espera de respuesta a correo con dudas.
+
+14. Enviado correo con dudas.
+
+
+Para preguntar:
+
+1. Se puede acabar el turno sin repartir ejércitos?
+
+2. En un punto recorro el array de Jugadores de menú, a falta de un HashMap donde buscar los nombres. Está bien?
+¿Sacrificar equals con color?
+
+3. Las misiones no se pueden repetir entre jugadores. No obstante, en el caso de las M4X, existe una misión default.
+Esa misión se puede repetir?
+
+4. getPaisPorNombre
+
+5. Formatos en los obtener
+
+6. Los dados vienen en reverse order?
+
+7. Error 124

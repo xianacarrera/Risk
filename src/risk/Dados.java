@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 // Esta clase representa los dados del juego
-class Dados {
+public class Dados {
 
-    private Random rand; //??????? Seed
+    private final Random rand;      // Seed
 
     public Dados(){
         rand = new Random();
@@ -29,10 +29,5 @@ class Dados {
             // Número de dados incorrecto
             return null;
         }
-    }
-
-    // ???????????????????
-    public int tirarDado(){
-        return rand.nextInt(6) + 1;
     }
 }

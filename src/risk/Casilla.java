@@ -2,18 +2,18 @@ package risk;
 
 public class Casilla {
 
-    private int fila, columna;      // Innecesarias?
     private int tipoCasilla;
         // -1 -> no es océano
         // 0 -> océano predeterminado
         // 1 -> océano con conexión horizontal
         // 2 -> océano con conexión vertical
     private Pais pais;
+    private static ConsolaNormal consolaNormal;
 
-    public Casilla(int fila, int columna){
-        this.fila = fila;
-        this.columna = columna;
-    }
+    /*
+     * Casilla no necesita fila ni columna, porque estas se pueden gestionar a través de los índices del
+     * ArrayList<ArrayList<>> del mapa. Se puede usar el constructor por defecto de Java
+     */
 
     public Pais getPais(){
         return pais;
@@ -31,7 +31,7 @@ public class Casilla {
         if (tipoCasilla <= 2 && tipoCasilla >= -1){
             this.tipoCasilla = tipoCasilla;
         } else {
-            System.out.println("Tipo de casilla no existente");
+            consolaNormal.imprimir("Tipo de casilla no existente");
         }
     }
 

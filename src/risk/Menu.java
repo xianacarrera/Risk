@@ -1,602 +1,596 @@
 package risk;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.*;
 
-/* Hacer cabecera */
+import risk.excepciones.*;
 
 /**
+ * Menu representa una antesala del verdadero programa.
  *
- * @author Manuel Lama
+ * En él se realiza la lectura de los comandos introducidos por el usuario y las gestiones necesarias para poder
+ * enviar la información que estas proporcionan de forma limpia a los diferentes métodos que después las ejecutan,
+ * desde la clase Juego.
+ *
+ * Se describen a continuación las diferentes posibilidades para la inserción de comandos:
+ *
+ * COMANDOS INICIALES PARA EMPEZAR A JUGAR
+ * crear mapa
+ * crear <nombre_jugador> <nombre_color>
+ * crear jugadores <nombre_fichero>
+ * asignar <nombre_jugador> <identificador_misión>
+ * asignar misiones <nombre_fichero>
+ * asignar <nombre_jugador> <abreviatura_país>
+ * asignar paises <nombre_fichero>
+ * repartir ejercitos <número> <nombre_país>
+ * repartir ejercitos
+ *
+ *
+ * COMANDOS DISPONIBLES DURANTE EL JUEGO
+ * obtener frontera <abreviatura_país>
+ * obtener continente <abreviatura_país>
+ * obtener color <abreviatura_país>
+ * obtener países <abreviatura_continente>
+ * cambiar cartas <id_carta1> <id_carta2> <id_carta3>
+ * cambiar cartas todas
+ * acabar turno
+ * jugador
+ * describir jugador <nombre_jugador>
+ * describir país <abreviatura_país>
+ * describir continente <abreviatura_continente>
+ * ver mapa
+ * atacar <abreviatura_pais1> <abreviatura_pais2>
+ * atacar <abreviatura_pais1> <dadosAtaque> <abreviatura_pais2> <dadosDefensa>
+ * rearmar <abreviatura_pais1> <número_ejércitos> <abreviatura_pais2>
+ * asignar carta <id_carta>
  */
+
+
 public class Menu {
-    // En esta clase se deberían de definir los atributos a los que será
-    // necesario acceder durante la ejecución del programa como, por ejemplo,
-    // el mapa o los jugadores
 
-    private HashMap<String, Jugador> jugadores;
+    // Atributos correspondientes a otras clases del proyecto
+    private ConsolaNormal consolaNormal;        // No puede ser final porque se inicializa dentro de un try-catch
+    private Juego juego;                        // No puede ser final porque se inicializa dentro de un try-catch
+    private final Turnos turnos;
 
-    private Mapa mapa;
-    private Formateo formateo;
-    private Accion accion;
+    /********************************************************************************************************/
 
-    private static int flagOrdenInicial;
-    private static int flagTurno;
-
-
-
-    /**
-     *
-     */
     public Menu() {
-        // Inicialización de algunos atributos
-        jugadores = new HashMap<>();
-        formateo = new Formateo();
 
-        // Iniciar juego
-        String orden= null;
-        BufferedReader bufferLector= null;
+        // En primer lugar, se inicializan los atributos de la clase
         try {
-            File fichero=  new File("comandos.csv");
-            FileReader lector= new FileReader(fichero);
-            bufferLector= new BufferedReader(lector);
+            // El constructor de ConsolaNormal puede lanzar una excepción que hay que tratar
+            // Como Juego inicializa ConsolaNormal en su constructor, puede lanzar el mismo error
 
-            while((orden= bufferLector.readLine())!=null) {
-                System.out.println("$> " + orden);
-                String[] partes=orden.split(" ");
-                String comando= partes[0];
-                // COMANDOS INICIALES PARA EMPEZAR A JUGAR
-                //    crear mapa
-                //    crear jugadores <nombre_fichero>
-                //    crear <nombre_jugador> <nombre_color>
-                //    asignar misiones
-                //    asignar paises <nombre_fichero>
-                //    asignar <nombre_pais> <nombre_jugador>
+            consolaNormal = ConsolaNormal.getInstancia();
+            // getInstancia() es un método estático que devuelve un objeto de ConsolaNormal
+            juego = new Juego();      // En Juego se desarrollan las instrucciones de los comandos
+        } catch (Exception excepcion) {
+            System.exit(1);     // No se ha podido crear la consola para leer e imprimir mensajes
+        }
 
-                // COMANDOS DISPONIBLES DURANTE EL JUEGO
-                //    acabar
-                //    atacar <nombre_pais> <nombre_pais>
-                //    describir continente <nombre_continente>
-                //    describir frontera <nombre_pais>
-                //    describir frontera <nombre_continente>
-                //    describir jugador <nombre_jugador>
-                //    describir pais <nombre_pais>
-                //    jugador
-                //    repartir ejercitos
-                //    ver mapa
-                //    ver pais <nombre_pais>
-                switch(comando) {
-                    case "crear":
-                        if (partes.length == 2) {
-                            if (partes[1].equals("mapa")) {
-                                // crearMapa es un método de la clase Menú desde el que se puede invocar
-                                // a otros métodos de las clases que contienen los atributos y los métodos
-                                // necesarios para realizar esa invocación
-                                if (flagOrdenInicial == 0) {
-                                    crearMapa();
-                                    flagOrdenInicial++;
+        turnos = new Turnos();   // Mantenimiento del orden correcto en la introducción de comandos
+
+        // Lectura de los comandos introducidos por el usuario
+        String orden;                        // Almacenará cada línea leída
+        try {
+            //File fichero = new File("comandos.txt");
+            //FileReader lector = new FileReader(fichero);
+            //BufferedReader bufferLector = new BufferedReader(lector);
+
+
+            //while ((orden = bufferLector.readLine()) != null) {
+                //gestionComandos(orden);
+            //}
+
+            //consolaNormal.escribirFinComandos();         // Se ha terminado de leer comandos
+
+        } catch (Exception excepcion) {
+            // No se ha encontrado un fichero o ha habido un error en la apertura del mismo. Introducción manual
+            while (!((orden = consolaNormal.leer()).equals("fin"))) {
+                gestionComandos(orden);
+            }
+
+            consolaNormal.escribirFinComandos();        // Se ha terminado de leer comandos
+        }
+    }
+
+    public void gestionComandos(String orden) {
+        try {
+            // Se lee una línea y se guarda en orden. Si no es null, aún no se ha acabado de leer el fichero.
+
+            consolaNormal.imprimir("$> " + orden);     // Se imprime por pantalla y se guarda
+            String[] partes = orden.split(" ");
+            String comando = partes[0];
+
+            switch (comando) {
+                case "crear":
+                    switch (partes.length) {
+                        case 2:
+                            if (partes[1].equals("mapa")) {                   // crear mapa
+                                if (turnos.mapaNoCreado()) {
+                                    juego.crearMapa();                        // Se crea el mapa
+                                    juego.verMapa();                          // Se imprime por pantalla
+                                    turnos.cambiarFaseInicial(1);             // Siguiente fase
                                 } else {
-                                    resultadoError(99);
+                                    // Mapa ya creado
+                                    throw new ExcepcionGeo(consolaNormal.mensajeError(107));
                                 }
                             } else {
-                                resultadoError(101);
+                                // Comando incorrecto
+                                throw new ExcepcionComando(consolaNormal.mensajeError(101));
                             }
-                        } else if (partes.length == 3) {
-                            if (flagOrdenInicial == 1) {
-                                if (partes[1].equals("jugadores")) {
-                                    crearJugador(new File(partes[2]));
-                                } else {
-                                    crearJugador(partes[1], partes[2]);
-                                }
-                            } else {
-                                resultadoError(99);
-                            }
-                        } else {
-                            resultadoError(101);
-                        }
-                        break;
-                    case "asignar":
-                        if (partes.length != 3) {
-                            resultadoError(101);
-                        } else if (partes[1].equals("paises")) {
-                            // asignarPaises es un método de la clase Menu que recibe como entrada el fichero
-                            // en el que se encuentra la asignación de países a jugadores. Dentro de este
-                            // método se invocará a otros métodos de las clases que contienen los atributos
-                            // y los métodos necesarios para realizar esa invocación
-                            if (flagOrdenInicial == 2 || flagOrdenInicial == 3) {
-                                flagOrdenInicial = 3;
-                                asignarPaises(new File(partes[2]));
-                            } else {
-                                resultadoError(99);
-                            }
-                        } else if (partes[1].equals("misiones")) {
-                            if (flagOrdenInicial == 1 || flagOrdenInicial == 2) {
-                                flagOrdenInicial = 2;
-                                asignarMisiones(new File(partes[2]));
-                            } else {
-                                resultadoError(99);
-                            }
-                        } else if (partes[1].equals("carta")){
-                            asignarCartas();
                             break;
-                        } else if (partes[2] == "M1" || partes[2] == "M2" || partes[2] == "M31"
-                                || partes[2] == "M32" || partes[2] == "M33" || partes[2] == "M34"
-                                || partes[2] == "M41" || partes[2] == "M42" || partes[2] == "M43"
-                                || partes[2] == "M44" || partes[2] == "M45" || partes[2] == "M46") {
-                            if (flagOrdenInicial == 1 || flagOrdenInicial == 2) {
-                                flagOrdenInicial = 2;
-                                asignarMisiones(partes[1], partes[2]);
+
+                        case 3:
+                            switch (turnos.getFaseInicial()) {
+                                case 0:
+                                    // Mapa no creado
+                                    throw new ExcepcionGeo(consolaNormal.mensajeError(106));
+                                case 1:                                              // Mapa ya creado
+                                case 2:                                              // Fase de jugadores
+                                    if (partes[1].equals("jugadores")) {             // crear jugadores
+                                        crearJugadores(new File(partes[2]));
+                                    } else {
+                                        juego.crearJugador(partes[1], partes[2]);    // crear jugador
+                                    }
+                                    break;
+                                default:
+                                    // Comando no permitido
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                            }
+                            break;
+
+                        default:
+                            throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                            // Comando incorrecto
+                    }
+                    break;
+
+
+                case "asignar":
+                    switch (partes.length) {
+                        case 3:
+                            switch (partes[1]) {
+                                case "paises":                                      // asignar paises
+                                    switch (turnos.getFaseInicial()) {
+                                        case 0:                 // Mapa no creado
+                                        case 1:                 // Mapa ya creado
+                                        case 2:                 // Jugadores ya creados
+                                        case 3:                 // Fase de asignar misiones (sin finalizar)
+                                            // Misiones no asignadas
+                                            throw new ExcepcionMision(consolaNormal.mensajeError(118));
+                                        case 4:                 // Fase de preparación para asignar países
+                                            juego.asignarEjercitosIniciales();
+                                            /*
+                                             * Para poder asignar un país se necesita que el correspondiente
+                                             * jugador tenga ya disponibles los ejércitos iniciales
+                                             */
+                                            turnos.cambiarFaseInicial(5);
+                                        case 5:                 // Fase de asignar países
+                                        case 6:                 // Aún no se ha empezado a repartir ejércitos
+                                            asignarPaises(new File(partes[2]));
+                                            break;
+                                        default:
+                                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                    }
+                                    break;
+
+                                case "misiones":                                    // asignar misiones
+                                    switch (turnos.getFaseInicial()) {
+                                        case 0:             // Mapa no creado
+                                        case 1:             // Mapa ya creado
+                                            // Jugadores no creados
+                                            throw new ExcepcionJugador(consolaNormal.mensajeError(105));
+                                        case 2:             // Creación de jugadores
+                                            /*
+                                             * Si la introducción de los comandos es correcta, en este momento
+                                             * ya se han creado todos los jugadores. Se trata, por consiguiente,
+                                             * del instante adecuado para comprobar que el número de jugadores
+                                             * esté dentro de los límites definidos: [3, 6]. Si esto es cierto,
+                                             * se pasará a la fase de asignar misiones. En caso contrario,
+                                             * se cierra el programa (no hay un error definido).
+                                             */
+                                            juego.comprobarJugadores();
+                                        case 3:             // Fase de asignar misiones
+                                        case 4:             // Fase de transición entre asignar misiones y países
+                                            asignarMisiones(new File(partes[2]));
+                                            break;
+                                        default:
+                                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                    }
+                                    break;
+
+                                case "carta":                                       // asignar carta
+                                    if (turnos.sePuedeAsignarCarta()) {
+                                        juego.asignarCarta(partes[2]);
+                                    } else {
+                                        throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                    }
+                                    break;
+
+                                default:
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                            }
+                            break;
+
+                        case 4:
+                            switch (partes[1]) {
+                                case "mision":                              // asignar mision
+                                    switch (turnos.getFaseInicial()) {
+                                        case 0:                // Mapa no creado
+                                        case 1:                // Mapa ya creado
+                                            throw new ExcepcionJugador(consolaNormal.mensajeError(105));
+                                        case 2:                // Fase de creación de jugadores
+                                            /*
+                                             * Si la introducción de los comandos es correcta, en este momento
+                                             * ya se han creado todos los jugadores. Se trata, por consiguiente,
+                                             * del instante adecuado para comprobar que el número de jugadores
+                                             * esté dentro de los límites definidos: [3, 6]. Si esto es cierto,
+                                             * se pasará a la fase de asignar misiones. En caso contrario,
+                                             * se cierra el programa (no hay un error definido).
+                                             */
+                                            juego.comprobarJugadores();
+                                        case 3:                 // Fase de asignar misiones
+                                        case 4:                 // Fase de transición entre asignar misiones y países
+                                            juego.asignarMision(partes[2], partes[3]);
+                                            break;
+                                        default:
+                                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                    }
+                                    break;
+
+                                case "pais":                                         // asignar pais
+                                    switch (turnos.getFaseInicial()) {
+                                        case 0:            // Mapa no creado
+                                        case 1:            // Mapa ya creado
+                                        case 2:            // Creación de jugadores
+                                        case 3:            // Asignación de misiones (sin completar)
+                                            // Misiones no asignadas
+                                            throw new ExcepcionMision(consolaNormal.mensajeError(118));
+                                        case 4:             // Asignación de misiones completada - fase previa a 5
+                                            juego.asignarEjercitosIniciales();
+                                            /*
+                                             * Para poder asignar un país se necesita que el correspondiente
+                                             * jugador tenga ya disponibles los ejércitos iniciales
+                                             */
+                                            turnos.cambiarFaseInicial(5);
+                                        case 5:             // Fase de asignación de países
+                                        case 6:             // Aún no se han repartido ejércitos
+                                            juego.asignarPais(partes[2], partes[3]);
+                                            break;
+                                        default:
+                                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                    }
+                                    break;          // case "pais"
+
+                                default:
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                            }
+                            break;          // case donde partes.length == 4
+
+                        default:
+                            throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+                    break;          // case "asignar"
+
+
+                case "repartir":                                        // repartir ejercitos
+                    if (partes.length == 2 && partes[1].equals("ejercitos")) {
+                        if (turnos.todosPaisesAsignados()) {
+                            juego.repartirEjercitosAut();
+                            turnos.empezarJuego();
+                            /*
+                             * Tras ejecutarse repartirEjercitosAut(), todos los jugadores tendrán todos sus
+                             * ejércitos iniciales repartidos. Por tanto, puede empezar el juego en sí.
+                             */
+                            juego.asignarEjercitos(juego.jugadorActual());
+                            break;
+                        } else {
+                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                        }
+
+                    } else if (partes.length == 4) {
+                        /*
+                         * En este caso, se deben comprobar dos casos: si la ejecución se encuentra en el reparto
+                         * de ejércitos del proceso inicial, o si ya ha empezado el juego y se llama desde el turno
+                         * de un jugador dado. Esto no ocurría para el comando "repartir ejércitos", que solo se
+                         * puede utilizar en el primer caso.
+                         */
+                        switch (turnos.getFaseInicial()) {
+                            case 6:         // Se han asignado todos los países => fase de repartir ejércitos
+                                turnos.cambiarFaseInicial(7);
+                            case 7:         // Fase de repartir ejércitos
+                                juego.repartirEjercitos(juego.jugadorActual(),
+                                        Integer.parseInt(partes[2]), partes[3], true);
+                                break;
+
+                            case -1:        // Ya ha empezado el juego
+                                if (turnos.sePuedeRepartirEjercitosTurno()) {
+                                    juego.repartirEjercitos(juego.jugadorActual(),
+                                            Integer.parseInt(partes[2]), partes[3], true);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+
+                            default:
+                                throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                        }
+                        break;
+
+                    } else {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+
+                case "cambiar":
+                    if (partes.length == 3 && partes[1].equals("cartas") && partes[2].equals("todas")) {
+                        // cambiar cartas todas
+                        if (turnos.sePuedeCambiarCartas()) {
+                            juego.cambiarCartasTodas();
+                        } else {
+                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                        }
+                    } else if (partes.length == 5) {        // cambiar cartas
+                        if (turnos.sePuedeCambiarCartas()) {
+                            juego.cambiarCartas(partes[2], partes[3], partes[4]);
+                        } else {
+                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                        }
+                    } else {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+                    break;
+
+
+                case "acabar":
+                    if (partes.length == 2 && partes[1].equals("turno")) {          // acabar turno
+                        if (turnos.sePuedeAcabarTurno()) {
+                            juego.acabarTurno();
+                        } else {
+                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                        }
+                    } else {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+                    break;
+
+
+                case "jugador":                         // jugador
+                    if (turnos.juegoEmpezado()) {
+                        // La condición para llamar al comando es únicamente que haya empezado el juego
+                        juego.jugador();
+                    } else {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                    }
+                    break;
+
+
+                case "describir":
+                    if (partes.length == 3) {
+                        switch (partes[1]) {
+                            case "jugador":             // describir jugador
+                                if (turnos.juegoEmpezado()) {
+                                    juego.describirJugador(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+
+                            case "pais":                // describir pais
+                                if (turnos.juegoEmpezado()) {
+                                    juego.describirPais(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+
+                            case "continente":          // describir continente
+                                if (turnos.juegoEmpezado()) {
+                                    juego.describirContinente(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+
+                            default:
+                                throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                        }
+                    } else {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+                    break;
+
+
+                case "ver":
+                    if (partes.length == 2 && partes[1].equals("mapa")) {       // ver mapa
+                        if (turnos.juegoEmpezado()) {
+                            juego.verMapa();
+                        } else {
+                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                        }
+                    } else {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+                    break;
+
+
+                case "atacar":                              // atacar
+                    switch (partes.length) {
+                        case 3:
+                            if (turnos.sePuedeAtacar()) {
+                                juego.atacar(partes[1], partes[2]);
                             } else {
-                                resultadoError(99);
+                                throw new ExcepcionComando(consolaNormal.mensajeError(99));
                             }
-                        } else {
-                            if (flagOrdenInicial == 2 || flagOrdenInicial == 3) {
-                                flagOrdenInicial = 3;
-                                asignarPaises(partes[1], partes[2]);
+                            break;
+
+                        case 5:
+                            if (turnos.sePuedeAtacar()) {
+                                juego.atacarMan(partes[1], partes[2], partes[3], partes[4]);
                             } else {
-                                resultadoError(99);
+                                throw new ExcepcionComando(consolaNormal.mensajeError(99));
                             }
-                        }
-                        break;
-                    case "repartir":
-                        if (partes.length == 2 && partes[1].equals("ejercitos")) {
-                            if (flagOrdenInicial == 3 || flagOrdenInicial == 4) {     // ??????
-                                flagOrdenInicial = 4;
-                                // TODO: repartirEjercitos() ---> PREGUNTAR ORDEN
-                            }
-                        } else if (partes.length == 4){
-                            flagOrdenInicial = 4;
-                            // TODO: repartirEjercitos();
+                            break;
+
+                        default:
+                            throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    }
+                    break;
+
+
+                case "rearmar":
+                    if (partes.length != 4) {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    } else {                                // rearmar
+                        if (turnos.sePuedeRearmar()) {
+                            juego.rearmar(partes[1], Integer.parseInt(partes[2]), partes[3]);
                         } else {
-                            resultadoError(101);
+                            throw new ExcepcionComando(consolaNormal.mensajeError(99));
                         }
-                        break;
-                    case "cambiar":
-                    case "acabar":
-                        if (partes.length == 2 && partes[1].equals("turno")){
-                            // flagTurno?
-                            acabarTurno();
-                        } else {
-                            resultadoError(101);
+                    }
+                    break;
+
+
+                case "obtener":
+                    if (partes.length != 3) {
+                        throw new ExcepcionComando(consolaNormal.mensajeError(101));
+                    } else {
+                        switch (partes[1]) {
+                            case "frontera":                    // obtener frontera
+                                if (turnos.juegoEmpezado()) {
+                                    juego.obtenerFrontera(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+                            case "continente":                  // obtener continente
+                                if (turnos.juegoEmpezado()) {
+                                    juego.obtenerContinente(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+                            case "color":                       // obtener color
+                                if (turnos.juegoEmpezado()) {
+                                    juego.obtenerColor(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+                            case "paises":                      // obtener paises
+                                if (turnos.juegoEmpezado()) {
+                                    juego.obtenerPaises(partes[2]);
+                                } else {
+                                    throw new ExcepcionComando(consolaNormal.mensajeError(99));
+                                }
+                                break;
+                            default:
+                                throw new ExcepcionComando(consolaNormal.mensajeError(101));
                         }
-                        break;
-                    case "jugador":
-                        // flagTurno?
-                        describirJugador();
-                        break;
-                    case "describir":
-                        if (partes.length != 3){
-                            resultadoError(101);
-                        } else if (partes[1].equals("jugador")){
-                            describirJugador(partes[2]);
-                        } else if (partes[1].equals("pais")){
-                            describirPais(partes[2]);
-                        } else if (partes[1].equals("continente")){
-                            describirContinente(partes[2]);
-                        } else {
-                            resultadoError(101);
-                        }
-                        break;
-                    case "ver":
-                        if (partes.length == 2 && partes[1].equals("mapa")){
-                            verMapa();
-                        } else {
-                            resultadoError(101);
-                        }
-                        break;
-                    case "atacar":
-                        if (partes.length == 3){
-                            atacar(partes[1], partes[2]);
-                        } else if (partes.length == 5){
-                            atacar(partes[1], partes[2], partes[3], partes[4]);
-                        } else {
-                            resultadoError(101);
-                        }
-                        break;
-                    case "rearmar":
-                        if (partes.length != 4){
-                            resultadoError(101);
-                        } else {
-                            rearmar(partes[1], partes[2], partes[3]);
-                        }
-                        break;
-                    default:
-                        resultadoError(101);
-                }
+                    }
+                    break;
+
+                default:                // default de switch (comando)
+                    throw new ExcepcionComando(consolaNormal.mensajeError(101));
             }
-        } catch(Exception excepcion) {
-            excepcion.printStackTrace();
+        } catch (ExcepcionGeo | ExcepcionCarta | ExcepcionJugador | ExcepcionMision | ExcepcionComando excepcionGeo) {
+            consolaNormal.imprimir(excepcionGeo.getMessage());
+        } catch (Exception exception) {
+            // Se recogen también errores debidos a otras causas, como la lectura de ficheros
+            consolaNormal.imprimir("Error no contemplado\n");
         }
-
-        Accion accion = new Accion();
     }
 
-
-    public void crearMapa() {
-        // Código necesario para crear el mapa
-        mapa = new Mapa();
-
-        String linea = null;
-        BufferedReader bufferLector = null;
-
-        try{
-            File fichero = new File("Mapa.txt");
-            FileReader lector = new FileReader(fichero);
-            bufferLector = new BufferedReader(lector);
-
-            while ((linea = bufferLector.readLine()) != null){
-                String[] infoPais = linea.split(" ");
-                if (infoPais.length == 4) {
-                    mapa.generarPais(infoPais[0], infoPais[1], Integer.parseInt(infoPais[2]),
-                            Integer.parseInt(infoPais[3]));
-                } else {
-                    System.out.println("NO");
-                }
-            }
-
-            bufferLector.close();
-
-            verMapa();
-
-        } catch(Exception ex){
-            ex.printStackTrace();
-        }
-
-    }
-
-    public void verMapa(){
-        System.out.println(mapa);
-    }
-
-    public void crearJugador(String nombre, String color) {
-        // Código necesario para crear a un jugador a partir de su nombre y color
-        Jugador jugador = new Jugador(nombre, color);
-        jugadores.put(nombre, jugador);
-
-        System.out.println("{\n" + formateo.formatoSimple("nombre", nombre) +
-                formateo.formatoSimpleFinal("color", color) + "}");
-    }
-
-    /**
-     *
-     * @param file
-     */
-    public void crearJugador(File file) {
-        // Código necesario para crear a los jugadores del RISK
-
-        String linea = null;
-        BufferedReader bufferLector = null;
-
-        try{
+    public void crearJugadores(File file) {
+        String linea;
+        try {
             FileReader lector = new FileReader(file);
-            bufferLector = new BufferedReader(lector);
+            BufferedReader bufferLector = new BufferedReader(lector);
 
-            while ((linea = bufferLector.readLine()) != null){
+            while ((linea = bufferLector.readLine()) != null) {
                 String[] infoJug = linea.split(";");
-                if (infoJug.length == 2) {
-                    crearJugador(infoJug[0], infoJug[1]);
-                } else {
-                    System.out.println("NO");
+
+                // Para poder seguir leyendo el fichero aunque ocurra un error, se introduce un try-catch en el bucle
+                try {
+                    if (infoJug.length == 2) juego.crearJugador(infoJug[0], infoJug[1]);
+                    // En cada línea se indican nombre y color
+                } catch (Exception exception) {
+                    /*
+                     * Como los únicos tipos de excepciones que da crearJugador son excepcionGeo y excepcionJugador,
+                     * se pueden recoger englobándolas en su clase base, Exception, pues la forma de gestionar cada
+                     * uno es la misma.
+                     */
+                    consolaNormal.imprimir(exception.getMessage());
                 }
             }
 
             bufferLector.close();
 
-        } catch(Exception ex){
-            ex.printStackTrace();
+        } catch (Exception exception) {     // El error no se debe a crearJugador, sino al propio fichero
+            consolaNormal.imprimir("Error en la apertura del fichero de jugadores\n");
         }
     }
 
-    public void asignarMisiones(String nombreJugador, String idMision){
-        Jugador jugador = jugadores.get(nombreJugador);
-        jugador.setMision(idMision);
-
-        if (idMision == "M41" || idMision == "M42" || idMision == "M43" || idMision == "M44" || idMision == "M45"
-                || idMision == "M46"){
-            ArrayList<String> colores = new ArrayList<>();
-
-            for (Jugador jug : jugadores.values()){
-                colores.add(jug.getColor());
-            }
-
-            switch(idMision){
-                case "M41":
-                    if (!colores.contains("AMARILLO") || jugador.getColor() == "AMARILLO"){
-                        idMision = "M1";
-                    }
-                    break;
-                case "M42":
-                    if (!colores.contains("AZUL") || jugador.getColor() == "AZUL"){
-                        idMision = "M1";
-                    }
-                    break;
-                case "M43":
-                    if (!colores.contains("CYAN") || jugador.getColor() == "CYAN"){
-                        idMision = "M1";
-                    }
-                    break;
-                case "M44":
-                    if (!colores.contains("ROJO") || jugador.getColor() == "ROJO"){
-                        idMision = "M1";
-                    }
-                    break;
-                case "M45":
-                    if (!colores.contains("VERDE") || jugador.getColor() == "VERDE"){
-                        idMision = "M1";
-                    }
-                    break;
-                case "M46":
-                    if (!colores.contains("VIOLETA") || jugador.getColor() == "VIOLETA"){
-                        idMision = "M1";
-                    }
-                    break;
-            }
-        }
-
-
-
-
-        System.out.println("{" + formateo.formatoSimple("nombre", nombreJugador)
-                + formateo.formatoSimpleFinal("mision", explicarMision(idMision)) + "}");
-    }
-
-    public String explicarMision(String idMision){
-        // Recibe el id de la misión e imprime en qué consiste
-        String mision;
-
-        switch (idMision){
-            case "M1":
-                mision = "Conquistar 24 países de la preferencia del jugador";
-                break;
-            case "M2":
-                mision = "Conquistar 18 países de la preferencia del jugador con un mínimo de dos ejércitos";
-                break;
-            case "M31":
-                mision = "Conquistar Asia y América del Sur";
-                break;
-            case "M32":
-                mision = "Conquistar Asia y África";
-                break;
-            case "M33":
-                mision = "Conquistar América del Norte y África";
-                break;
-            case "M34":
-                mision = "Conquistar América del Norte y Oceanía";
-                break;
-            case "M41":
-                mision = "Destruir el ejército AMARILLO";
-                break;
-            case "M42":
-                mision = "Destruir el ejército AZUL";
-                break;
-            case "M43":
-                mision = "Destruir el ejército CYAN";
-                break;
-            case "M44":
-                mision = "Destruir el ejército ROJO";
-                break;
-            case "M45":
-                mision = "Destruir el ejército VERDE";
-                break;
-            case "M46":
-                mision = "Destruir el ejército VIOLETA";
-                break;
-            default:
-                mision = "";
-        }
-        return mision;
-    }
-
-    public void asignarMisiones(File file){
-
-        String linea = null;
-        BufferedReader bufferLector = null;
-
-        try{
+    public void asignarMisiones(File file) {
+        String linea;
+        try {
             FileReader lector = new FileReader(file);
-            bufferLector = new BufferedReader(lector);
+            BufferedReader bufferLector = new BufferedReader(lector);
 
-            while ((linea = bufferLector.readLine()) != null){
+            while ((linea = bufferLector.readLine()) != null) {
                 String[] infoMision = linea.split(";");
-                if (infoMision.length == 2) {
-                    asignarMisiones(infoMision[0], infoMision[1]);
-                } else {
-                    System.out.println("NO");
+
+                // Para poder seguir leyendo el fichero aunque ocurra un error, se introduce un try-catch en el bucle
+                try {
+                    if (infoMision.length == 2) {
+                        juego.asignarMision(infoMision[0], infoMision[1]);
+                    }
+                } catch (Exception exception) {
+                    /*
+                     * Como las únicas excepciones que da asignarMision son excepcionMision y excepcionJugador,
+                     * se pueden recoger englobándolas en su clase base, Exception, pues la forma de gestionar cada
+                     * uno es la misma.
+                     */
+                    consolaNormal.imprimir(exception.getMessage());
                 }
             }
 
             bufferLector.close();
 
-        } catch(Exception ex){
-            ex.printStackTrace();
+        } catch (Exception exception) {         // El error no se debe a asignarMisiones, sino al propio fichero
+            consolaNormal.imprimir("Error en la apertura del fichero de misiones\n");
         }
     }
 
-
-    /**
-     *
-     * @param nombrePais
-     * @param nombreJugador
-     */
-    public void asignarPaises(String abrevPais, String nombreJugador){
-        // Código necesario para asignar un país a un jugador
-
-        Jugador jugador = jugadores.get(nombreJugador);
-        Pais pais = mapa.getPais(abrevPais);
-
-        jugador.asignarPais(pais);
-
-        System.out.println("{\n" + formateo.formatoSimple("nombre", jugador.getNombre()) +
-                formateo.formatoSimple("pais", pais.getNombre()) +
-                formateo.formatoSimple("continente", pais.getContinente().getNombre()) + "}");
-        // TODO: fronteras
-
-    }
-
-    /**
-     *
-     * @param file
-     */
-    public void asignarPaises(File file){
-        // Código necesario para asignar países
-
-        String linea = null;
-        BufferedReader bufferLector = null;
-
-        try{
+    public void asignarPaises(File file) {
+        String linea;
+        try {
             FileReader lector = new FileReader(file);
-            bufferLector = new BufferedReader(lector);
+            BufferedReader bufferLector = new BufferedReader(lector);
 
-            while ((linea = bufferLector.readLine()) != null){
+            while ((linea = bufferLector.readLine()) != null) {
                 String[] info = linea.split(";");
-                if (info.length == 2) {
-                    // La llamada a asignar no necesita objeto porque Java implícitamente asume que el objeto es this
-                    asignarPaises(info[1], info[0]);
-                } else {
-                    System.out.println("NO");
+
+                // Para poder seguir leyendo el fichero aunque ocurra un error, se introduce un try-catch en el bucle
+                try {
+                    if (info.length == 2) {
+                        // La llamada a asignar no necesita objeto. Java implícitamente asume que el objeto es this
+                        juego.asignarPais(info[0], info[1]);
+                    }
+                } catch (Exception exception) {
+                    /*
+                     * Como las únicas excepciones que da asignarPais son excepcionGeo y excepcionJugador,
+                     * se pueden recoger englobándolas en su clase base, Exception, pues la forma de gestionar cada
+                     * uno es la misma.
+                     */
+                    consolaNormal.imprimir(exception.getMessage());
                 }
             }
 
             bufferLector.close();
 
-        } catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
-
-
-    public void repartirEjercitos(Jugador jugador, String numero, String nombrePais){ Pais pais = mapa.getPaisPorNombre(nombrePais);
-
-        if (!pais.estaOcupadoPor(jugador)){
-            resultadoError(110);
-            return;
-        }
-
-        int numFinal = Integer.parseInt(numero);
-
-        if (numFinal > jugador.getNumEjercitos()){
-            numFinal = jugador.getNumEjercitos();
-        }
-
-        pais.setNumEjercitos(numFinal);
-
-
-        System.out.println("{\n" + formateo.formatoSimple("pais", nombrePais)
-                + formateo.formatoSimple("jugador", jugador.getNombre())
-                + formateo.formatoSimple("numeroEjercitosAsignados", numFinal)
-                + formateo.formatoSimple("numeroEjercitosTotales", pais.getNumEjercitos())
-                + formateo.formatoDosConjuntosFinal("paisesOcupadosContinente",
-                        pais.getContinente().getListaPaisesOcupados(), pais.getContinente().getDatosOcupacion())
-                + "}");
-    }
-
-
-    public void obtenerFrontera(){
-
-    }
-
-    public void obtenerContinente(String abrevPais){
-        System.out.println("{\n" + " continente: \"" + mapa.preguntarContinentePais(abrevPais) + "\" }");
-    }
-
-    public void obtenerColor(String abrevPais){
-        System.out.println("{\n" + " color: \"" + mapa.preguntarColorPais(abrevPais) + "\" }");
-    }
-
-    public void obtenerPaises(String abrevCont){
-        System.out.println("{\n" + " color: \"" + mapa.preguntarListaPaises(abrevCont) + "\" }");
-    }
-
-
-
-
-
-    public void resultadoError(int codigo){
-        switch (codigo){
-            case 99:
-                System.out.println("Comando no permitido en este momento");
-                break;
-            case 100:
-                System.out.println("Color no permitido");
-                break;
-            case 101:
-                System.out.println("Comando incorrecto");
-                break;
-            case 102:
-                System.out.println("El continente no existe");
-                break;
-            case 103:
-                System.out.println("El jugador no existe");
-                break;
-            case 104:
-                System.out.println("El jugador ya existe");
-                break;
-            case 105:
-                System.out.println("Los jugadores no están creados");
-                break;
-            case 106:
-                System.out.println("El mapa no está creado");
-                break;
-            case 107:
-                System.out.println("El mapa ya ha sido creado");
-                break;
-            case 109:
-                System.out.println("El país no existe");
-                break;
-            case 110:
-                System.out.println("El país no pertenece al jugador");
-                break;
-            case 111:
-                System.out.println("El país pertenece al jugador");
-                break;
-            case 112:
-                System.out.println("Los países no son frontera");
-                break;
-            case 113:
-                System.out.println("El país ya está asignado");
-                break;
-            case 114:
-                System.out.println("El color ya está asignado");
-                break;
-            case 115:
-                System.out.println("La misión ya está asignada");
-                break;
-            case 116:
-                System.out.println("La misión no existe");
-                break;
-            case 117:
-                System.out.println("El jugador ya tiene asignada una misión");
-                break;
-            case 118:
-                System.out.println("Las misiones no están asignadas");
-                break;
-            case 119:
-                System.out.println("Ejércitos no disponibles");
-                break;
-            case 120:
-                System.out.println("No hay cartas suficientes");
-                break;
-            case 121:
-                System.out.println("No hay configuración de cambio");
-                break;
-            case 122:
-                System.out.println("Algunas cartas no pertenecen al jugador");
-                break;
-            case 123:
-                System.out.println("Algunas cartas no existen");
-                break;
-            case 124:
-                System.out.println("No hay ejércitos suficientes");
-                break;
-            case 125:
-                System.out.println("El identificador no sigue el formato correcto");
-                break;
-            case 126:
-                System.out.println("Carta de equipamiento ya asignada");
-                break;
+        } catch (Exception exception) {         // El error no se debe a asignarPais, sino al propio fichero
+            consolaNormal.imprimir("Error en la apertura del fichero de países\n");
         }
     }
 }
